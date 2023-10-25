@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 
 const SignUp = () => {
   return (
-    <section className="flex flex-col justify-center max-w-[450px] mx-auto mt-[100px]">
+    <section className="flex flex-col justify-center max-w-[500px] mx-auto mt-[80px] border p-10 rounded-lg shadow-lg">
       <div className="flex flex-col justify-center items-center gap-2">
         <Avatar>
           <AssignmentIndIcon />
@@ -59,9 +59,9 @@ const SignUp = () => {
           required
           fullWidth
           name="password"
-          label="Password"
+          label="Confirm Password"
           type="password"
-          id="password"
+          id="confirm-password"
           autoComplete="new-password"
         />
       </div>

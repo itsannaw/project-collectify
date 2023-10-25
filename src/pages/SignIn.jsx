@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 
 export default function SignIn() {
   return (
-    <section className="flex flex-col justify-center max-w-[400px] mx-auto mt-[100px]">
+    <section className="flex flex-col justify-center max-w-[500px] mx-auto mt-[100px] border p-10 rounded-lg shadow-lg">
       <div className="flex flex-col justify-center items-center gap-2">
         <Avatar>
           <PeopleIcon />
@@ -45,7 +45,7 @@ export default function SignIn() {
           Forgot password?
         </Link>
         <Link href="#" variant="body2">
-          {"Don't have an account? Sign Up"}
+          {"Don't have an account? Sign Up!"}
         </Link>
       </div>
     </section>
