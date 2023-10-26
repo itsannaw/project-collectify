@@ -1,6 +1,6 @@
 import { DataGrid } from "@mui/x-data-grid";
 
-const CollectionsTable = () => {
+const FavouriteTable = () => {
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "firstName", headerName: "First name", width: 130 },
@@ -29,10 +29,9 @@ const CollectionsTable = () => {
           },
         }}
         pageSizeOptions={[5, 10]}
-        checkboxSelection
       />
     </div>
   );
 };
 
-export default CollectionsTable;
+export default FavouriteTable;

@@ -1,6 +1,5 @@
 import { LoadingButton } from "@mui/lab";
 import { Avatar } from "@mui/material";
-import CollectionsTable from "../components/UserAccount/CollectionsTable";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Tabs from "@mui/joy/Tabs";
 import TabList from "@mui/joy/TabList";
@@ -9,7 +8,8 @@ import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import { Person } from "@mui/icons-material";
 import { TabPanel } from "@mui/joy";
 import SettingsIcon from "@mui/icons-material/Settings";
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import FavouriteTable from "../components/UserAccount/FavouriteTable";
 
 const UserAccount = () => {
   //   const [loading, setLoading] = React.useState(true);
@@ -85,7 +85,7 @@ const UserAccount = () => {
           <TabPanel value={1}>
             {" "}
             <div className="flex flex-col justify-center items-center gap-6 mt-5 max-w-[800px] w-full mx-auto">
-              <CollectionsTable />
+              <FavouriteTable />
             </div>
           </TabPanel>
         </Tabs>
