@@ -6,10 +6,53 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import Typography from "@mui/material/Typography";
+import { unauthorizedApi } from "../api/http";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const [forms, setForms] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const newErrors = { ...errors };
+    delete newErrors[e.target.name];
+    setErrors(newErrors);
+    setForms({
+      ...forms,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      setIsLoading(true);
+      e.preventDefault();
+
+      await unauthorizedApi.post("signup", {
+        user: {
+          ...forms,
+        },
+      });
+      setIsLoading(false);
+      navigate("/");
+    } catch (error) {
+      if (error.response?.data.status.errors) {
+        setErrors(error.response.data.status.errors);
+      }
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
   return (
-    <section className="flex flex-col justify-center max-w-[500px] mx-auto mt-[80px] border p-10 rounded-lg shadow-lg">
+    <section className="flex flex-col justify-center max-w-[500px] mx-auto my-[30px] border p-10 rounded-lg shadow-lg">
       <div className="flex flex-col justify-center items-center gap-2">
         <Avatar>
           <AssignmentIndIcon />
@@ -38,6 +81,13 @@ const SignUp = () => {
         />
       </div>
       <div className="flex flex-col mt-3 gap-3">
+        <TextField
+          required
+          fullWidth
+          id="email"
+          label="Username"
+          name="username"
+        />
         <TextField
           required
           fullWidth
