@@ -30,10 +30,10 @@ export default function SignIn() {
 
     try {
       setIsLoading(true);
-      const response = await unauthorizedApi.post("auth/login", {
-        user: credentials,
+      const { data } = await unauthorizedApi.post("auth/login", {
+        ...credentials,
       });
-      const token = response.headers.get("Authorization");
+      const { token } = data("Authorization");
       Cookies.set("token", token);
       setIsLoading(false);
       navigate("/home");
@@ -61,12 +61,12 @@ export default function SignIn() {
         required
         fullWidth
         id="email"
-        label="Email Address"
+        label="Email"
         name="email"
         type="email"
         autoComplete="email"
         autoFocus
-        value={credentials.email}
+        value={credentials.username}
         onChange={handleChange}
         error={!!errorText}
       />
