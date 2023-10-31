@@ -33,7 +33,7 @@ export default function SignIn() {
       const { data } = await unauthorizedApi.post("auth/login", {
         ...credentials,
       });
-      const { token } = data("Authorization");
+      const { token } = data;
       Cookies.set("token", token);
       setIsLoading(false);
       navigate("/home");
@@ -66,7 +66,7 @@ export default function SignIn() {
         type="email"
         autoComplete="email"
         autoFocus
-        value={credentials.username}
+        value={credentials.email}
         onChange={handleChange}
         error={!!errorText}
       />
@@ -83,9 +83,9 @@ export default function SignIn() {
         onChange={handleChange}
         error={!!errorText}
       />
+      <div className="text-red-500 text-[15px] font-semibold">{errorText}</div>
       <div className="flex flex-col items-center gap-4 mt-4">
         <Button
-          type="submit"
           fullWidth
           variant="contained"
           onClick={handleSubmit}

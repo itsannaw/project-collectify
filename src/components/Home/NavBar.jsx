@@ -8,9 +8,10 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
-
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -34,6 +35,10 @@ export default function NavBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleAdmin = () => {
+    navigate("/admin");
+  };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -51,8 +56,8 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleAdmin}>Admin panel</MenuItem>
     </Menu>
   );
 
@@ -102,8 +107,10 @@ export default function NavBar() {
             <MenuIcon />
           </IconButton>
           <div className="flex gap-2 items-center justify-center">
-            <img className="h-[35px] w-[35px]" src="bar.svg" alt="" />
-            <span className="text-xl font-semibold ">COLLECTIFY</span>
+            <span className="text-xl font-semibold drop-shadow-xl">
+              COLLECTIFY
+            </span>
+            <img className="h-[45px] w-[45px]" src="bar.svg" alt="" />
           </div>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
