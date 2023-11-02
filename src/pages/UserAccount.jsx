@@ -1,21 +1,21 @@
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
 import { LoadingButton } from "@mui/lab";
 import { Avatar } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import Tabs from "@mui/joy/Tabs";
-import TabList from "@mui/joy/TabList";
-import Tab from "@mui/joy/Tab";
-import ListItemDecorator from "@mui/joy/ListItemDecorator";
-import { Person } from "@mui/icons-material";
-import { TabPanel } from "@mui/joy";
-import SettingsIcon from "@mui/icons-material/Settings";
-import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
-import FavouriteTable from "../components/UserAccount/FavouriteTable";
+import React from "react";
 
 const UserAccount = () => {
   //   const [loading, setLoading] = React.useState(true);
   //   function handleClick() {
   //     setLoading(true);
   //   }
+  const [value, setValue] = React.useState("1");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <section className="flex flex-col justify-center max-w-[1000px] mx-auto my-[80px] border p-10 rounded-lg shadow-lg">
@@ -28,38 +28,15 @@ const UserAccount = () => {
           This is your personal account, here you can get various information
           about the collections you like and also create your own!
         </span>
-        <Tabs
-          className="flex max-w-[800px] mx-auto w-full items-center mt-8"
-          //   aria-label="Icon tabs"
-          defaultValue={0}
-        >
-          <TabList>
-            <Tab>
-              <ListItemDecorator>
-                <Person />
-              </ListItemDecorator>
-              Profile
-            </Tab>
-            <Tab>
-              <ListItemDecorator>
-                <FavoriteIcon />
-              </ListItemDecorator>
-              Favourite
-            </Tab>
-            <Tab>
-              <ListItemDecorator>
-                <LibraryBooksIcon />
-              </ListItemDecorator>
-              Your collections
-            </Tab>
-            <Tab>
-              <ListItemDecorator>
-                <SettingsIcon />
-              </ListItemDecorator>
-              Settings
-            </Tab>
+        <TabContext value={value}>
+          <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <Tab label="Profile" value="1" />
+            <Tab label="Favourite" value="2" />
+            <Tab label="Your collections" value="3" />
+            <Tab label="Settings" value="4" />
           </TabList>
-          <TabPanel value={0}>
+
+          <TabPanel value="1">
             <div className="flex mt-7 gap-8">
               <Avatar
                 sx={{ width: 200, height: 200 }}
@@ -82,13 +59,10 @@ const UserAccount = () => {
               </div>
             </div>
           </TabPanel>
-          <TabPanel value={1}>
-            {" "}
-            <div className="flex flex-col justify-center items-center gap-6 mt-5 max-w-[800px] w-full mx-auto">
-              <FavouriteTable />
-            </div>
-          </TabPanel>
-        </Tabs>
+          <TabPanel value="2">Item Two</TabPanel>
+          <TabPanel value="3">Item Three</TabPanel>
+          <TabPanel value="4">Item Three</TabPanel>
+        </TabContext>
       </div>
     </section>
   );

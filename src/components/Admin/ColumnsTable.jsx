@@ -2,7 +2,7 @@ import getDateTime from "./GetDataTime";
 
 const ColumnsTable = [
   { field: "id", headerName: "ID", width: 100 },
-  { field: "full_name", headerName: "Full name", width: 180 },
+  { field: "username", headerName: "Username", width: 180 },
   { field: "email", headerName: "Email", width: 180 },
   {
     field: "created_at",

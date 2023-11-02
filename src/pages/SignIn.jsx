@@ -36,7 +36,7 @@ export default function SignIn() {
       const { token } = data;
       Cookies.set("token", token);
       setIsLoading(false);
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       if (error.response?.data.error) {
         setErrorText(error.response.data.error);
