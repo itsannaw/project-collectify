@@ -1,8 +1,9 @@
 const NAME_MAPPER = {
-  name: "Your name",
+  first_name: "First name",
+  last_name: "Last name",
   username: "Username",
   password: "Password",
-  //   password_confirmation: "Password confirmation",
+  password_confirmation: "Password confirmation",
   email: "Email",
 };
 
@@ -17,8 +18,8 @@ const DefaultErrors = ({ errors }) => {
         <div className="" key={key}>
           <strong>{NAME_MAPPER[key]}:</strong>
           <ul>
-            {errors[key].map((error, index) => (
-              <li key={index}>• {capitalizeFirstLetter(error)}</li>
+            {errors[key].map((message, index) => (
+              <li key={index}>• {capitalizeFirstLetter(message)}</li>
             ))}
           </ul>
         </div>

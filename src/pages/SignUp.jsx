@@ -18,7 +18,7 @@ const SignUp = () => {
     username: "",
     email: "",
     password_digest: "",
-    // password_confirmation: "",
+    password_confirmation: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isPrivacyChecked, setIsPrivacyChecked] = useState(false);
@@ -45,9 +45,10 @@ const SignUp = () => {
       setIsLoading(false);
       navigate("/");
     } catch (error) {
-      if (error.response?.data.status.errors) {
-        setErrors(error.response.data.status.errors);
+      if (error.response?.data.errors) {
+        setErrors(error.response.data.errors);
       }
+
       console.error(error);
       setIsLoading(false);
     }
@@ -74,6 +75,7 @@ const SignUp = () => {
           autoFocus
           value={forms.first_name}
           onChange={handleChange}
+          error={!!errors.first_name}
         />
         <TextField
           required
@@ -84,6 +86,7 @@ const SignUp = () => {
           autoComplete="family-name"
           value={forms.last_name}
           onChange={handleChange}
+          error={!!errors.last_name}
         />
       </div>
       <div className="flex flex-col mt-3 gap-3">
@@ -123,11 +126,13 @@ const SignUp = () => {
         <TextField
           required
           fullWidth
-          name="password"
+          name="password_confirmation"
           label="Confirm Password"
           type="password"
           id="confirm-password"
-          autoComplete="new-password"
+          value={forms.password_confirmation}
+          onChange={handleChange}
+          error={!!errors.password_confirmation}
         />
       </div>
       <div className="flex mt-2">
@@ -142,8 +147,10 @@ const SignUp = () => {
           label="I have read and agree to the Privacy Policy."
         />
       </div>
-      <div className="flex flex-col justify-center items-center mt-2 gap-4">
+      <div>
         <DefaultErrors errors={errors} />
+      </div>
+      <div className="flex flex-col justify-center items-center mt-2 gap-4">
         <Button
           type="submit"
           fullWidth
