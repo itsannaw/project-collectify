@@ -5,7 +5,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import AdminPanel from "../components/Admin/AdminPanel";
-import NavBar from "../components/Home/NavBar";
+import NavBar from "../components/NavBar/NavBar";
 
 const Admin = () => {
   //   const [loading, setLoading] = React.useState(true);

@@ -2,9 +2,9 @@ import { DataGrid } from "@mui/x-data-grid";
 
 const FavouriteTable = () => {
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "firstName", headerName: "First name", width: 130 },
-    { field: "lastName", headerName: "Last name", width: 130 },
+    { field: "title", headerName: "Title", width: 70 },
+    { field: "firstName", headerName: "", width: 130 },
+    { field: "score", headerName: "Score", width: 130 },
     {
       field: "fullName",
       headerName: "Full name",
