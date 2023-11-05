@@ -43,7 +43,7 @@ const SignUp = () => {
         ...forms,
       });
       setIsLoading(false);
-      navigate("/");
+      navigate("/signin");
     } catch (error) {
       if (error.response?.data.errors) {
         setErrors(error.response.data.errors);
@@ -75,7 +75,7 @@ const SignUp = () => {
           autoFocus
           value={forms.first_name}
           onChange={handleChange}
-          error={!!errors.first_name}
+          error={Boolean(errors.first_name)}
         />
         <TextField
           required
@@ -86,7 +86,7 @@ const SignUp = () => {
           autoComplete="family-name"
           value={forms.last_name}
           onChange={handleChange}
-          error={!!errors.last_name}
+          error={Boolean(errors.last_name)}
         />
       </div>
       <div className="flex flex-col mt-3 gap-3">
@@ -98,7 +98,7 @@ const SignUp = () => {
           name="username"
           value={forms.username}
           onChange={handleChange}
-          error={!!errors.username}
+          error={Boolean(errors.username)}
         />
         <TextField
           required
@@ -109,7 +109,7 @@ const SignUp = () => {
           autoComplete="email"
           value={forms.email}
           onChange={handleChange}
-          error={!!errors.email}
+          error={Boolean(errors.email)}
         />
         <TextField
           required
@@ -121,7 +121,7 @@ const SignUp = () => {
           autoComplete="new-password"
           value={forms.password}
           onChange={handleChange}
-          error={!!errors.password}
+          error={Boolean(errors.password)}
         />
         <TextField
           required
@@ -132,7 +132,7 @@ const SignUp = () => {
           id="confirm-password"
           value={forms.password_confirmation}
           onChange={handleChange}
-          error={!!errors.password_confirmation}
+          error={Boolean(errors.password_confirmation)}
         />
       </div>
       <div className="flex mt-2">

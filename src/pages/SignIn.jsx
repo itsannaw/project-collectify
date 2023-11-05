@@ -71,7 +71,7 @@ export default function SignIn() {
           autoFocus
           value={credentials.email}
           onChange={handleChange}
-          error={!!errorText}
+          error={Boolean(errorText)}
         />
         <TextField
           margin="normal"
@@ -84,7 +84,7 @@ export default function SignIn() {
           autoComplete="current-password"
           value={credentials.password}
           onChange={handleChange}
-          error={!!errorText}
+          error={Boolean(errorText)}
         />
         <div className="text-red-500 text-[15px] font-semibold">
           {errorText}
