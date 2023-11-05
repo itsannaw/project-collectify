@@ -11,7 +11,7 @@ const ColumnsTable = [
     renderCell: (params) => <>{getDateTime(params.value)}</>,
   },
   {
-    field: "login_at",
+    field: "updated_at",
     headerName: "Login",
     width: 180,
     renderCell: (params) => (

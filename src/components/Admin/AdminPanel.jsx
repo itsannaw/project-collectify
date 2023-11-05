@@ -32,7 +32,7 @@ const AdminPanel = () => {
   const onBlock = async () => {
     try {
       const { data } = await api.post("users/block", {
-        users_ids: selectedIds,
+        selectedIds,
       });
       setRows(data || []);
     } catch (error) {
@@ -43,7 +43,7 @@ const AdminPanel = () => {
   const onUnblock = async () => {
     try {
       const { data } = await api.post("users/unblock", {
-        users_ids: selectedIds,
+        selectedIds,
       });
       setRows(data);
     } catch (error) {
@@ -54,7 +54,7 @@ const AdminPanel = () => {
   const onDelete = async () => {
     try {
       const { data } = await api.post("users/delete", {
-        users_ids: selectedIds,
+        selectedIds,
       });
       setRows(data || []);
     } catch (error) {

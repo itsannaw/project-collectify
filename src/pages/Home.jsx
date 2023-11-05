@@ -1,5 +1,5 @@
 import FavoriteTag from "../components/Home/FavouriteTag";
-import NavBar from "../components/Home/NavBar";
+import NavBar from "../components/NavBar/NavBar";
 
 const Home = () => {
   return (

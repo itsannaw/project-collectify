@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import { unauthorizedApi } from "../api/http";
+import NavBar from "../components/NavBar/NavBar";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -47,59 +48,64 @@ export default function SignIn() {
   };
 
   return (
-    <section className="flex flex-col justify-center max-w-[500px] mx-auto mt-[100px] border p-10 rounded-lg shadow-lg">
-      <div className="flex flex-col justify-center items-center gap-2">
-        <Avatar>
-          <PeopleIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-      </div>
-      <TextField
-        margin="normal"
-        required
-        fullWidth
-        id="email"
-        label="Email"
-        name="email"
-        type="email"
-        autoComplete="email"
-        autoFocus
-        value={credentials.email}
-        onChange={handleChange}
-        error={!!errorText}
-      />
-      <TextField
-        margin="normal"
-        required
-        fullWidth
-        name="password"
-        label="Password"
-        type="password"
-        id="password"
-        autoComplete="current-password"
-        value={credentials.password}
-        onChange={handleChange}
-        error={!!errorText}
-      />
-      <div className="text-red-500 text-[15px] font-semibold">{errorText}</div>
-      <div className="flex flex-col items-center gap-4 mt-4">
-        <Button
+    <section>
+      <NavBar />
+      <div className="flex flex-col justify-center max-w-[500px] mx-auto mt-[80px] border p-10 rounded-lg shadow-lg">
+        <div className="flex flex-col justify-center items-center gap-2">
+          <Avatar>
+            <PeopleIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+        </div>
+        <TextField
+          margin="normal"
+          required
           fullWidth
-          variant="contained"
-          onClick={handleSubmit}
-          loading={isLoading}
-        >
-          Sign In
-        </Button>
+          id="email"
+          label="Email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          autoFocus
+          value={credentials.email}
+          onChange={handleChange}
+          error={!!errorText}
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          value={credentials.password}
+          onChange={handleChange}
+          error={!!errorText}
+        />
+        <div className="text-red-500 text-[15px] font-semibold">
+          {errorText}
+        </div>
+        <div className="flex flex-col items-center gap-4 mt-4">
+          <Button
+            fullWidth
+            variant="contained"
+            onClick={handleSubmit}
+            loading={isLoading}
+          >
+            Sign In
+          </Button>
 
-        <Link className="text-[#1976d2] text-center underline">
-          Forgot password?
-        </Link>
-        <Link className="text-[#1976d2] text-center underline" to="/signup">
-          Don`t have an account? Register here.
-        </Link>
+          <Link className="text-[#1976d2] text-center underline">
+            Forgot password?
+          </Link>
+          <Link className="text-[#1976d2] text-center underline" to="/signup">
+            Don`t have an account? Register here.
+          </Link>
+        </div>
       </div>
     </section>
   );
