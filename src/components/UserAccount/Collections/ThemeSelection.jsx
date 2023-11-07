@@ -16,7 +16,7 @@ const currencies = [
   },
 ];
 
-export default function ThemeSelection() {
+const ThemeSelection = () => {
   return (
     <>
       <TextField
@@ -24,11 +24,16 @@ export default function ThemeSelection() {
         select
         defaultValue="Books"
         helperText="Please select your theme"
+        required
       >
         {currencies.map((option) => (
-          <MenuItem key={option.value}>{option.value}</MenuItem>
+          <MenuItem key={option.value} value={option.value}>
+            {option.value}
+          </MenuItem>
         ))}
       </TextField>
     </>
   );
-}
+};
+
+export default ThemeSelection;
