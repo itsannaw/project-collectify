@@ -6,7 +6,7 @@ import { LoadingButton } from "@mui/lab";
 import { Avatar } from "@mui/material";
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
-import CollectionTable from "../components/UserAccount/CollectionTable";
+import CollectionTable from "../components/UserAccount/Collections/CollectionTable";
 
 const UserAccount = () => {
   //   const [loading, setLoading] = React.useState(true);
@@ -64,7 +64,9 @@ const UserAccount = () => {
               </div>
             </TabPanel>
             <TabPanel value="2">Item Two</TabPanel>
-            <TabPanel value="3"><CollectionTable /></TabPanel>
+            <TabPanel value="3">
+              <CollectionTable />
+            </TabPanel>
             <TabPanel value="4">Item Three</TabPanel>
           </TabContext>
         </div>
