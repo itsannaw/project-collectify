@@ -5,6 +5,7 @@ import UserAccount from "./pages/UserAccount";
 import Home from "./pages/Home";
 import globalRouter from "./router/globalRouter";
 import Admin from "./pages/Admin";
+import CreateCollection from "./pages/CreateCollection";
 
 const App = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/user" element={<UserAccount />} />
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/create-collection" element={<CreateCollection />} />
       </Routes>
     </>
   );
