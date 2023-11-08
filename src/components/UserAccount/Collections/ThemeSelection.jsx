@@ -23,7 +23,6 @@ const ThemeSelection = () => {
         id="theme"
         select
         defaultValue="Books"
-        helperText="Please select your theme"
         required
       >
         {currencies.map((option) => (
