@@ -3,7 +3,7 @@ import CollectionButtons from "./CollectionButtons";
 const CollectionTable = () => {
   return (
     <section>
-      <div>
+      <div className="flex justify-end items-center gap-3">
         <CollectionButtons />
       </div>
     </section>

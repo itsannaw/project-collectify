@@ -9,8 +9,40 @@ import NumberFields from "../components/UserAccount/Collections/TypeFields/Numbe
 import BoolFields from "../components/UserAccount/Collections/TypeFields/BoolFields";
 import DataFields from "../components/UserAccount/Collections/TypeFields/DataFields";
 import { LoadingButton } from "@mui/lab";
+import { useState } from "react";
+import { unauthorizedApi } from "../api/http";
+import { useNavigate } from "react-router-dom";
 
 const CreateCollection = () => {
+  const navigate = useNavigate();
+  const [forms, setForms] = useState({
+    title: "",
+    desc: "",
+    image_url: "",
+    category_id: "",
+    user_id: "",
+  });
+
+  const handleChange = (e) => {
+    setForms({
+      ...forms,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      await unauthorizedApi.post("collection", {
+        ...forms,
+      });
+      navigate("/user");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <section>
       <div>
@@ -23,20 +55,25 @@ const CreateCollection = () => {
         <div className="flex flex-col gap-5 ">
           <div className="flex flex-col gap-2">
             <span className="font-bold">Title*</span>
-            <TextField required />
+            <TextField
+              onChange={handleChange}
+              name="title"
+              value={forms.title}
+              required
+            />
           </div>
 
           <div className="flex flex-col gap-2">
             <span className="font-bold">Description*</span>
-            <MarkdownField />
+            <MarkdownField onChange={handleChange} value={forms.desc} />
           </div>
           <div className="flex flex-col gap-2">
             <span className="font-bold">Theme*</span>
-            <ThemeSelection />
+            <ThemeSelection value={forms.category_id} onChange={handleChange} />
           </div>
           <div className="flex flex-col gap-2">
             <span className="font-bold">Picture*</span>
-            <UploadImages />
+            <UploadImages value={forms.image_url} onChange={handleChange} />
           </div>
         </div>
         <div className="flex flex-col items-center gap-3">
@@ -55,7 +92,13 @@ const CreateCollection = () => {
           <DataFields />
         </div>
         <div className="flex justify-center">
-          <LoadingButton variant="contained">Create</LoadingButton>
+          <LoadingButton
+            onClick={handleSubmit}
+            method="post"
+            variant="contained"
+          >
+            Create
+          </LoadingButton>
         </div>
       </div>
     </section>

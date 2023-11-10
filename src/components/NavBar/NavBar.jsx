@@ -28,7 +28,6 @@ export default function NavBar() {
             </button>
             <SearchField />
           </div>
-
           <MenuItemForNavBar />
         </div>
       </AppBar>

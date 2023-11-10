@@ -162,7 +162,7 @@ const SignUp = () => {
         >
           Sign Up
         </Button>
-        <Link className="text-[#1976d2] text-center underline" to="/">
+        <Link className="text-[#1976d2] text-center underline" to="/signin">
           Already have an account? Sign in!
         </Link>
       </div>

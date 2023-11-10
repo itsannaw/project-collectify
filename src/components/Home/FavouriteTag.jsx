@@ -15,6 +15,7 @@ export default function FavoriteTag() {
       renderTags={(tags, getTagProps) =>
         tags.map((item, index) => (
           <Chip
+            key={item.title}
             variant="solid"
             color="primary"
             endDecorator={<Close fontSize="sm" />}
@@ -32,4 +33,6 @@ const tags = [
   { title: "#LOL" },
   { title: "#goodfilms" },
   { title: "#funnyanimals" },
+  { title: "#history" },
+  { title: "#fantasy" },
 ];
