@@ -4,7 +4,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const StringFields = () => {
+const StringFields = ({ value, setValue }) => {
   return (
     <div>
       <Accordion>
@@ -18,16 +18,16 @@ const StringFields = () => {
         <AccordionDetails>
           <div className="flex flex-col gap-3 items-center">
             <div>
-              <Checkbox />
-              <TextField size="small" />
+              <Checkbox value={value} onChange={setValue} />
+              <TextField size="small" value={value} onChange={setValue} />
             </div>
             <div>
-              <Checkbox />
-              <TextField size="small" />
+              <Checkbox value={value} onChange={setValue} />
+              <TextField size="small" value={value} onChange={setValue} />
             </div>
             <div>
-              <Checkbox />
-              <TextField size="small" />
+              <Checkbox value={value} onChange={setValue} />
+              <TextField size="small" value={value} onChange={setValue} />
             </div>
           </div>
         </AccordionDetails>

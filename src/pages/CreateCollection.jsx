@@ -89,7 +89,7 @@ const CreateCollection = () => {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <span className="font-bold">Theme* {forms.category_id}</span>
+            <span className="font-bold">Theme*</span>
             <ListSelection
               value={forms.category_id}
               setValue={(e) => handleFormItemChange("category_id", e)}
