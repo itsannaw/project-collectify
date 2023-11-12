@@ -1,8 +1,6 @@
-import { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
 
-export default function MarkdownField() {
-  const [value, setValue] = useState("**Describe your collection!**");
+export default function MarkdownField({ value, setValue }) {
   return (
     <div className="container">
       <MDEditor value={value} onChange={setValue} />

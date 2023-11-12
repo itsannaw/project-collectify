@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import NavBar from "../components/NavBar/NavBar";
+import ListSelection from "../components/UserAccount/Collections/ListSelection";
 import MarkdownField from "../components/UserAccount/Collections/MarkdownField";
-import ThemeSelection from "../components/UserAccount/Collections/ThemeSelection";
 import UploadImages from "../components/UserAccount/Collections/UploadImages";
 import StringFields from "../components/UserAccount/Collections/TypeFields/StringFields";
 import LongTextFields from "../components/UserAccount/Collections/TypeFields/LongTextFields";
@@ -9,8 +9,8 @@ import NumberFields from "../components/UserAccount/Collections/TypeFields/Numbe
 import BoolFields from "../components/UserAccount/Collections/TypeFields/BoolFields";
 import DataFields from "../components/UserAccount/Collections/TypeFields/DataFields";
 import { LoadingButton } from "@mui/lab";
-import { useState } from "react";
-import { unauthorizedApi } from "../api/http";
+import { useEffect, useState } from "react";
+import api from "../api/http";
 import { useNavigate } from "react-router-dom";
 
 const CreateCollection = () => {
@@ -23,18 +23,22 @@ const CreateCollection = () => {
     user_id: "",
   });
 
-  const handleChange = (e) => {
+  const handleFormItemChange = (prop, value) => {
     setForms({
       ...forms,
-      [e.target.name]: e.target.value,
+      [prop]: value,
     });
+  };
+
+  const handleChange = (e) => {
+    handleFormItemChange(e.target.name, e.target.value);
   };
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
 
-      await unauthorizedApi.post("collection", {
+      await api.post("collection", {
         ...forms,
       });
       navigate("/user");
@@ -42,6 +46,20 @@ const CreateCollection = () => {
       console.error(error);
     }
   };
+
+  const [categories, setCategories] = useState([]);
+  const getCategories = async () => {
+    try {
+      const { data } = await api.get("categories");
+      setCategories(data);
+    } catch (error) {
+      console.error;
+    }
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   return (
     <section>
@@ -65,11 +83,18 @@ const CreateCollection = () => {
 
           <div className="flex flex-col gap-2">
             <span className="font-bold">Description*</span>
-            <MarkdownField onChange={handleChange} value={forms.desc} />
+            <MarkdownField
+              setValue={(e) => handleFormItemChange("desc", e)}
+              value={forms.desc}
+            />
           </div>
           <div className="flex flex-col gap-2">
-            <span className="font-bold">Theme*</span>
-            <ThemeSelection value={forms.category_id} onChange={handleChange} />
+            <span className="font-bold">Theme* {forms.category_id}</span>
+            <ListSelection
+              value={forms.category_id}
+              setValue={(e) => handleFormItemChange("category_id", e)}
+              options={categories}
+            />
           </div>
           <div className="flex flex-col gap-2">
             <span className="font-bold">Picture*</span>

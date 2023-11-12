@@ -10,8 +10,8 @@ const StringFields = () => {
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
+          aria-controls="content"
+          id="header"
         >
           <span className="text-[15px] font-semibold">String (short text)</span>
         </AccordionSummary>
