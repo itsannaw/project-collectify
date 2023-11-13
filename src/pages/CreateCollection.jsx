@@ -3,15 +3,12 @@ import NavBar from "../components/NavBar/NavBar";
 import ListSelection from "../components/UserAccount/Collections/ListSelection";
 import MarkdownField from "../components/UserAccount/Collections/MarkdownField";
 import UploadImages from "../components/UserAccount/Collections/UploadImages";
-import StringFields from "../components/UserAccount/Collections/TypeFields/StringFields";
-import LongTextFields from "../components/UserAccount/Collections/TypeFields/LongTextFields";
-import NumberFields from "../components/UserAccount/Collections/TypeFields/NumberFields";
-import BoolFields from "../components/UserAccount/Collections/TypeFields/BoolFields";
-import DataFields from "../components/UserAccount/Collections/TypeFields/DataFields";
 import { LoadingButton } from "@mui/lab";
 import { useEffect, useState } from "react";
 import api from "../api/http";
 import { useNavigate } from "react-router-dom";
+import AdaptiveFields from "../components/UserAccount/Collections/TypeFields/AdaptiveFields";
+import { OPTIONAL_FIELDS } from "../const/collections";
 
 const CreateCollection = () => {
   const navigate = useNavigate();
@@ -60,6 +57,7 @@ const CreateCollection = () => {
   useEffect(() => {
     getCategories();
   }, []);
+
 
   return (
     <section>
@@ -110,11 +108,16 @@ const CreateCollection = () => {
           </span>
         </div>
         <div className="flex flex-col items-center gap-2">
-          <StringFields />
-          <LongTextFields />
-          <NumberFields />
-          <BoolFields />
-          <DataFields />
+          {OPTIONAL_FIELDS.map((name) => {
+            return (
+              <AdaptiveFields
+                key={name}
+                value={forms}
+                setValue={setForms}
+                name={name}
+              />
+            );
+          })}
         </div>
         <div className="flex justify-center">
           <LoadingButton

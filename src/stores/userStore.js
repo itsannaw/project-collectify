@@ -36,7 +36,7 @@ const userStore = create(
       },
     }),
     {
-      name: "user", // name of the item in the storage (must be unique)
+      name: "user",
       storage: createJSONStorage(() => sessionStorage),
     }
   )
