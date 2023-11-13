@@ -59,53 +59,56 @@ export default function SignIn() {
             Sign in
           </Typography>
         </div>
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          autoFocus
-          value={credentials.email}
-          onChange={handleChange}
-          error={Boolean(errorText)}
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          value={credentials.password}
-          onChange={handleChange}
-          error={Boolean(errorText)}
-        />
-        <div className="text-red-500 text-[15px] font-semibold">
-          {errorText}
-        </div>
-        <div className="flex flex-col items-center gap-4 mt-4">
-          <Button
+        <form onSubmit={handleSubmit}>
+          <TextField
+            margin="normal"
+            required
             fullWidth
-            variant="contained"
-            onClick={handleSubmit}
-            loading={isLoading}
-          >
-            Sign In
-          </Button>
+            id="email"
+            label="Email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            autoFocus
+            value={credentials.email}
+            onChange={handleChange}
+            error={Boolean(errorText)}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={credentials.password}
+            onChange={handleChange}
+            error={Boolean(errorText)}
+          />
+          <div className="text-red-500 text-[15px] font-semibold">
+            {errorText}
+          </div>
+          <div className="flex flex-col items-center gap-4 mt-4">
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              onClick={handleSubmit}
+              loading={isLoading}
+            >
+              Sign In
+            </Button>
 
-          <Link className="text-[#1976d2] text-center underline">
-            Forgot password?
-          </Link>
-          <Link className="text-[#1976d2] text-center underline" to="/signup">
-            Don`t have an account? Register here.
-          </Link>
-        </div>
+            <Link className="text-[#1976d2] text-center underline">
+              Forgot password?
+            </Link>
+            <Link className="text-[#1976d2] text-center underline" to="/signup">
+              Don`t have an account? Register here.
+            </Link>
+          </div>
+        </form>
       </div>
     </section>
   );

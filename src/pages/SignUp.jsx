@@ -64,108 +64,109 @@ const SignUp = () => {
           Sign up
         </Typography>
       </div>
-      <div className="flex mt-4 gap-4 ">
-        <TextField
-          autoComplete="given-name"
-          name="first_name"
-          required
-          fullWidth
-          id="first_name"
-          label="First Name"
-          autoFocus
-          value={forms.first_name}
-          onChange={handleChange}
-          error={Boolean(errors.first_name)}
-        />
-        <TextField
-          required
-          fullWidth
-          id="last_name"
-          label="Last Name"
-          name="last_name"
-          autoComplete="family-name"
-          value={forms.last_name}
-          onChange={handleChange}
-          error={Boolean(errors.last_name)}
-        />
-      </div>
-      <div className="flex flex-col mt-3 gap-3">
-        <TextField
-          required
-          fullWidth
-          id="username"
-          label="Username"
-          name="username"
-          value={forms.username}
-          onChange={handleChange}
-          error={Boolean(errors.username)}
-        />
-        <TextField
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-          value={forms.email}
-          onChange={handleChange}
-          error={Boolean(errors.email)}
-        />
-        <TextField
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="new-password"
-          value={forms.password}
-          onChange={handleChange}
-          error={Boolean(errors.password)}
-        />
-        <TextField
-          required
-          fullWidth
-          name="password_confirmation"
-          label="Confirm Password"
-          type="password"
-          id="confirm-password"
-          value={forms.password_confirmation}
-          onChange={handleChange}
-          error={Boolean(errors.password_confirmation)}
-        />
-      </div>
-      <div className="flex mt-2">
-        <FormControlLabel
-          control={
-            <Checkbox
-              value="allowExtraEmails"
-              color="primary"
-              onChange={() => setIsPrivacyChecked(!isPrivacyChecked)}
-            />
-          }
-          label="I have read and agree to the Privacy Policy."
-        />
-      </div>
-      <div>
-        <DefaultErrors errors={errors} />
-      </div>
-      <div className="flex flex-col justify-center items-center mt-2 gap-4">
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          method="post"
-          onClick={handleSubmit}
-          loading={isLoading}
-          disabled={!isPrivacyChecked}
-        >
-          Sign Up
-        </Button>
-        <Link className="text-[#1976d2] text-center underline" to="/signin">
-          Already have an account? Sign in!
-        </Link>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <div className="flex mt-4 gap-4 ">
+          <TextField
+            autoComplete="given-name"
+            name="first_name"
+            required
+            fullWidth
+            id="first_name"
+            label="First Name"
+            autoFocus
+            value={forms.first_name}
+            onChange={handleChange}
+            error={Boolean(errors.first_name)}
+          />
+          <TextField
+            required
+            fullWidth
+            id="last_name"
+            label="Last Name"
+            name="last_name"
+            autoComplete="family-name"
+            value={forms.last_name}
+            onChange={handleChange}
+            error={Boolean(errors.last_name)}
+          />
+        </div>
+        <div className="flex flex-col mt-3 gap-3">
+          <TextField
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+            value={forms.username}
+            onChange={handleChange}
+            error={Boolean(errors.username)}
+          />
+          <TextField
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            value={forms.email}
+            onChange={handleChange}
+            error={Boolean(errors.email)}
+          />
+          <TextField
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="new-password"
+            value={forms.password}
+            onChange={handleChange}
+            error={Boolean(errors.password)}
+          />
+          <TextField
+            required
+            fullWidth
+            name="password_confirmation"
+            label="Confirm Password"
+            type="password"
+            id="confirm-password"
+            value={forms.password_confirmation}
+            onChange={handleChange}
+            error={Boolean(errors.password_confirmation)}
+          />
+        </div>
+        <div className="flex mt-2">
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="allowExtraEmails"
+                color="primary"
+                onChange={() => setIsPrivacyChecked(!isPrivacyChecked)}
+              />
+            }
+            label="I have read and agree to the Privacy Policy."
+          />
+        </div>
+        <div>
+          <DefaultErrors errors={errors} />
+        </div>
+        <div className="flex flex-col justify-center items-center mt-2 gap-4">
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            method="post"
+            loading={isLoading}
+            disabled={!isPrivacyChecked}
+          >
+            Sign Up
+          </Button>
+          <Link className="text-[#1976d2] text-center underline" to="/signin">
+            Already have an account? Sign in!
+          </Link>
+        </div>
+      </form>
     </section>
   );
 };
