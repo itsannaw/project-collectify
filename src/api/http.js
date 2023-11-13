@@ -12,7 +12,6 @@ api.interceptors.request.use(
   (config) => {
     const token = Cookies.get("token");
     if (token) {
-      console.log(token);
       config.headers.Authorization = token;
     }
     return config;

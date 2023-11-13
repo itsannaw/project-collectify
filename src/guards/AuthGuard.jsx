@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import userStore from "../stores/userStore";
 
 const AuthGuard = ({ component }) => {
-  const { user, getUser } = userStore();
+  const { user } = userStore();
+  const getUser = userStore((state) => state.getUser);
 
   const [status, setStatus] = useState(false);
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const AuthGuard = ({ component }) => {
 
   useEffect(() => {
     checkToken();
-  }, [component, checkToken]);
+  }, [component, checkToken, getUser]);
 
   return status ? (
     <React.Fragment>{component}</React.Fragment>

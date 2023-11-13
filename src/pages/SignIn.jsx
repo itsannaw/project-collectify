@@ -15,7 +15,6 @@ export default function SignIn() {
     email: "",
     password: "",
   });
-  const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState("");
 
   const handleChange = (e) => {
@@ -30,20 +29,17 @@ export default function SignIn() {
     e.preventDefault();
 
     try {
-      setIsLoading(true);
       const { data } = await unauthorizedApi.post("auth/login", {
         ...credentials,
       });
       const { token } = data;
       Cookies.set("token", token);
-      setIsLoading(false);
       navigate("/");
     } catch (error) {
       if (error.response?.data.error) {
         setErrorText(error.response.data.error);
       }
       console.error(error);
-      setIsLoading(false);
     }
   };
 
@@ -96,7 +92,6 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               onClick={handleSubmit}
-              loading={isLoading}
             >
               Sign In
             </Button>

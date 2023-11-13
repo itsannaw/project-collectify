@@ -10,7 +10,6 @@ export default function FavoriteTag() {
       placeholder="Tags"
       options={tags}
       limitTags={2}
-      color="info"
       getOptionLabel={(option) => option.title}
       renderTags={(tags, getTagProps) =>
         tags.map((item, index) => (

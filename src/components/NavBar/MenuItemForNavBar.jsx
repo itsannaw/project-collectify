@@ -25,7 +25,6 @@ const MenuItemForNavBar = () => {
     getUserIfToken();
   }, [getUserIfToken]);
 
-
   return (
     <div>
       <IconButton
@@ -48,11 +47,11 @@ const MenuItemForNavBar = () => {
         }}
       >
         {user ? (
-          <>
+          <div>
             <MenuItem onClick={() => navigate("/user")}>My account</MenuItem>
             <MenuItem onClick={() => navigate("/admin")}>Admin panel</MenuItem>
             <MenuItem onClick={logout}>Logout</MenuItem>
-          </>
+          </div>
         ) : (
           <MenuItem onClick={() => navigate("/signin")}>Sign In</MenuItem>
         )}

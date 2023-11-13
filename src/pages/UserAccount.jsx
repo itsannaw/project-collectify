@@ -4,16 +4,12 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { LoadingButton } from "@mui/lab";
 import { Avatar } from "@mui/material";
-import React from "react";
+import { useState } from "react";
 import NavBar from "../components/NavBar/NavBar";
 import CollectionTable from "../components/UserAccount/Collections/CollectionTable";
 
 const UserAccount = () => {
-  //   const [loading, setLoading] = React.useState(true);
-  //   function handleClick() {
-  //     setLoading(true);
-  //   }
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -48,14 +44,10 @@ const UserAccount = () => {
                   src="/static/images/avatar/1.jpg"
                 />
                 <div className="flex flex-col gap-10 mt-6">
-                  <span className="font-semibold">Full name: user</span>
+                  <span className="font-semibold">Full name: </span>
                   <span className="font-semibold">Email: user@mail.ru</span>
                   <LoadingButton
                     size="small"
-                    // onClick={handleClick}
-                    // endIcon={<SendIcon />}
-                    // loading={loading}
-                    loadingPosition="end"
                     variant="contained"
                   >
                     Edit photo
