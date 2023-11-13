@@ -38,7 +38,7 @@ export default function BasicMenuForNavBar() {
         }}
       >
         <MenuItem onClick={() => navigate("/")}>Homepage</MenuItem>
-        <MenuItem onClick={handleClose}>Contact us</MenuItem>
+        <MenuItem onClick={() => navigate("/contact")}>Contact us</MenuItem>
       </Menu>
     </div>
   );

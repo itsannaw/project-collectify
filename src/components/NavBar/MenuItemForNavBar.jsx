@@ -7,7 +7,7 @@ import Menu from "@mui/material/Menu";
 import userStore from "../../stores/userStore";
 
 const MenuItemForNavBar = () => {
-  const { user, getUserIfToken } = userStore();
+  const { user, getUserIfToken, logout } = userStore();
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
@@ -24,6 +24,7 @@ const MenuItemForNavBar = () => {
   useEffect(() => {
     getUserIfToken();
   }, [getUserIfToken]);
+
 
   return (
     <div>
@@ -50,7 +51,7 @@ const MenuItemForNavBar = () => {
           <>
             <MenuItem onClick={() => navigate("/user")}>My account</MenuItem>
             <MenuItem onClick={() => navigate("/admin")}>Admin panel</MenuItem>
-            <MenuItem>Logout</MenuItem>
+            <MenuItem onClick={logout}>Logout</MenuItem>
           </>
         ) : (
           <MenuItem onClick={() => navigate("/signin")}>Sign In</MenuItem>

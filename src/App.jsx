@@ -7,6 +7,7 @@ import globalRouter from "./router/globalRouter";
 import Admin from "./pages/Admin";
 import CreateCollection from "./pages/CreateCollection";
 import AuthGuard from "./guards/AuthGuard.jsx";
+import ContactUs from "./pages/ContactUs.jsx";
 
 const App = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const App = () => {
           path="/create-collection"
           element={protect(<CreateCollection />)}
         />
+        <Route path="/contact" element={<ContactUs />} />
       </Routes>
     </>
   );
