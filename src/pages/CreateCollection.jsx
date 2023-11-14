@@ -8,13 +8,14 @@ import api from "../api/http";
 import { useNavigate } from "react-router-dom";
 import AdaptiveFields from "../components/UserAccount/Collections/TypeFields/AdaptiveFields";
 import { OPTIONAL_FIELDS } from "../const/collections";
+import { getFormData } from "../helpers";
 
 const CreateCollection = () => {
   const navigate = useNavigate();
   const [forms, setForms] = useState({
     title: "",
     desc: "",
-    image_url: "",
+    file: "",
     category_id: "",
     user_id: "",
   });
@@ -33,11 +34,13 @@ const CreateCollection = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-
-      await api.post("collection", {
-        ...forms,
+      const formData = getFormData(forms);
+      await api.post("collection", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
-      navigate("/user");
+      // navigate("/user");
     } catch (error) {
       console.error(error);
     }
@@ -90,7 +93,7 @@ const CreateCollection = () => {
         </div>
         <div className="flex flex-col gap-2">
           <span className="font-bold">Picture*</span>
-          <UploadImages value={forms.image_url} onChange={handleChange} />
+          <UploadImages setValue={(e) => handleFormItemChange("file", e)} />
         </div>
       </div>
       <div className="flex flex-col items-center gap-3">
