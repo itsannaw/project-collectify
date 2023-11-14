@@ -12,7 +12,7 @@ export default function NavBar() {
   };
 
   return (
-    <section className="flex justify-between items-center">
+    <nav className="flex justify-between items-center">
       <AppBar position="static" color="inherit">
         <div className="flex justify-between mx-5 py-2 items-center">
           <div className="flex items-center gap-5">
@@ -31,6 +31,6 @@ export default function NavBar() {
           <MenuItemForNavBar />
         </div>
       </AppBar>
-    </section>
+    </nav>
   );
 }
