@@ -10,14 +10,6 @@ import AuthGuard from "../guards/AuthGuard.jsx";
 import UserAccount from "../pages/UserAccount.jsx";
 import HomePage from "../pages/HomePage.jsx";
 
-// <Route path="/user" element={protect(<UserAccount />)} />
-// <Route path="/" element={<Home />} />
-// <Route path="/admin" element={protect(<Admin />)} />
-// <Route
-//   path="/create-collection"
-//   element={protect(<CreateCollection />)}
-// />
-// <Route path="/contact" element={<ContactUs />} />
 
 const protect = (c) => <AuthGuard component={c} />;
 
