@@ -4,7 +4,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useCallback, useState } from "react";
-import { OPTIONAL_FIELDS_NAMES } from "../../../../const/collections";
+import { OPTIONAL_FIELDS_NAMES } from "../../../const/collections";
 
 const ITEM_IDS = {
   ONE: "1",

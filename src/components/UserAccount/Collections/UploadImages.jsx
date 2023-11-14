@@ -7,11 +7,9 @@ function ImageUpload({ setValue }) {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setValue(file);
-    console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        console.log(file);
         setSrc(e.target.result);
       };
       reader.readAsDataURL(file);

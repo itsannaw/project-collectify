@@ -6,7 +6,7 @@ import { LoadingButton } from "@mui/lab";
 import { useEffect, useState } from "react";
 import api from "../api/http";
 import { useNavigate } from "react-router-dom";
-import AdaptiveFields from "../components/UserAccount/Collections/TypeFields/AdaptiveFields";
+import AdaptiveFields from "../components/UserAccount/Collections/AdaptiveFields";
 import { OPTIONAL_FIELDS } from "../const/collections";
 import { getFormData } from "../helpers";
 
@@ -40,7 +40,7 @@ const CreateCollection = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      // navigate("/user");
+      navigate("/user");
     } catch (error) {
       console.error(error);
     }

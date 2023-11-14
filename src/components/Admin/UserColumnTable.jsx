@@ -1,6 +1,6 @@
 import getDateTime from "./GetDataTime";
 
-const ColumnsTable = [
+const UserColumnTable = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "username", headerName: "Username", width: 180 },
   { field: "email", headerName: "Email", width: 180 },
@@ -34,4 +34,4 @@ const ColumnsTable = [
   },
 ];
 
-export default ColumnsTable;
+export default UserColumnTable;

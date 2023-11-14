@@ -5,7 +5,7 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 import { useEffect, useState } from "react";
 import api from "../../api/http";
-import ColumnsTable from "./ColumnsTable";
+import UserColumnTable from "./UserColumnTable";
 
 const AdminPanel = () => {
   const [rows, setRows] = useState([]);
@@ -97,7 +97,7 @@ const AdminPanel = () => {
         >
           <DataGrid
             rows={rows}
-            columns={ColumnsTable}
+            columns={UserColumnTable}
             checkboxSelection
             slots={{
               loadingOverlay: LinearProgress,
