@@ -37,8 +37,22 @@ export default function BasicMenuForNavBar() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={() => navigate("/")}>Homepage</MenuItem>
-        <MenuItem onClick={handleClose}>Contact us</MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate("/");
+            handleClose();
+          }}
+        >
+          Homepage
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate("/contact");
+            handleClose();
+          }}
+        >
+          Contact us
+        </MenuItem>
       </Menu>
     </div>
   );

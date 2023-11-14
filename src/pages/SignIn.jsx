@@ -7,15 +7,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import { unauthorizedApi } from "../api/http";
-import NavBar from "../components/NavBar/NavBar";
+import userStore from "../stores/userStore";
 
 export default function SignIn() {
   const navigate = useNavigate();
+  const { getUserIfToken } = userStore();
+
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
-  const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState("");
 
   const handleChange = (e) => {
@@ -30,35 +31,33 @@ export default function SignIn() {
     e.preventDefault();
 
     try {
-      setIsLoading(true);
       const { data } = await unauthorizedApi.post("auth/login", {
         ...credentials,
       });
       const { token } = data;
       Cookies.set("token", token);
-      setIsLoading(false);
+      await getUserIfToken();
+
       navigate("/");
     } catch (error) {
       if (error.response?.data.error) {
         setErrorText(error.response.data.error);
       }
       console.error(error);
-      setIsLoading(false);
     }
   };
 
   return (
-    <section>
-      <NavBar />
-      <div className="flex flex-col justify-center max-w-[500px] mx-auto mt-[80px] border p-10 rounded-lg shadow-lg">
-        <div className="flex flex-col justify-center items-center gap-2">
-          <Avatar>
-            <PeopleIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-        </div>
+    <div className="flex flex-col justify-center max-w-[500px] mx-auto mt-[80px] border p-10 rounded-lg shadow-lg">
+      <div className="flex flex-col justify-center items-center gap-2">
+        <Avatar>
+          <PeopleIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+      </div>
+      <form onSubmit={handleSubmit}>
         <TextField
           margin="normal"
           required
@@ -91,10 +90,10 @@ export default function SignIn() {
         </div>
         <div className="flex flex-col items-center gap-4 mt-4">
           <Button
+            type="submit"
             fullWidth
             variant="contained"
             onClick={handleSubmit}
-            loading={isLoading}
           >
             Sign In
           </Button>
@@ -106,7 +105,7 @@ export default function SignIn() {
             Don`t have an account? Register here.
           </Link>
         </div>
-      </div>
-    </section>
+      </form>
+    </div>
   );
 }

@@ -1,11 +1,13 @@
 import MenuItem from "@mui/material/MenuItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Menu from "@mui/material/Menu";
+import userStore from "../../stores/userStore";
 
 const MenuItemForNavBar = () => {
+  const { user, getUserIfToken, logout } = userStore();
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
@@ -18,6 +20,10 @@ const MenuItemForNavBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    getUserIfToken();
+  }, [getUserIfToken]);
 
   return (
     <div>
@@ -40,10 +46,43 @@ const MenuItemForNavBar = () => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={() => navigate("/user")}>My account</MenuItem>
-        <MenuItem onClick={() => navigate("/admin")}>Admin panel</MenuItem>
-        <MenuItem onClick={() => navigate("/signin")}>Sign In</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        {user ? (
+          <div>
+            <MenuItem
+              onClick={() => {
+                navigate("/user");
+                handleClose();
+              }}
+            >
+              My account
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                navigate("/admin");
+                handleClose();
+              }}
+            >
+              Admin panel
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                logout();
+                handleClose();
+              }}
+            >
+              Logout
+            </MenuItem>
+          </div>
+        ) : (
+          <MenuItem
+            onClick={() => {
+              navigate("/signin");
+              handleClose();
+            }}
+          >
+            Sign In
+          </MenuItem>
+        )}
       </Menu>
     </div>
   );
