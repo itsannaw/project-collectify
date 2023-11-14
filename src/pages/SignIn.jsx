@@ -7,9 +7,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import { unauthorizedApi } from "../api/http";
+import userStore from "../stores/userStore";
 
 export default function SignIn() {
   const navigate = useNavigate();
+  const { getUserIfToken } = userStore();
+
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -33,6 +36,8 @@ export default function SignIn() {
       });
       const { token } = data;
       Cookies.set("token", token);
+      await getUserIfToken();
+
       navigate("/");
     } catch (error) {
       if (error.response?.data.error) {

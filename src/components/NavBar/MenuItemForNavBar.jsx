@@ -48,12 +48,40 @@ const MenuItemForNavBar = () => {
       >
         {user ? (
           <div>
-            <MenuItem onClick={() => navigate("/user")}>My account</MenuItem>
-            <MenuItem onClick={() => navigate("/admin")}>Admin panel</MenuItem>
-            <MenuItem onClick={logout}>Logout</MenuItem>
+            <MenuItem
+              onClick={() => {
+                navigate("/user");
+                handleClose();
+              }}
+            >
+              My account
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                navigate("/admin");
+                handleClose();
+              }}
+            >
+              Admin panel
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                logout();
+                handleClose();
+              }}
+            >
+              Logout
+            </MenuItem>
           </div>
         ) : (
-          <MenuItem onClick={() => navigate("/signin")}>Sign In</MenuItem>
+          <MenuItem
+            onClick={() => {
+              navigate("/signin");
+              handleClose();
+            }}
+          >
+            Sign In
+          </MenuItem>
         )}
       </Menu>
     </div>
