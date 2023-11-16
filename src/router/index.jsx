@@ -9,7 +9,7 @@ import CreateCollection from "../pages/CreateCollection.jsx";
 import AuthGuard from "../guards/AuthGuard.jsx";
 import UserAccount from "../pages/UserAccount.jsx";
 import HomePage from "../pages/HomePage.jsx";
-
+import MoreCollection from "../pages/MoreCollection.jsx";
 
 const protect = (c) => <AuthGuard component={c} />;
 
@@ -28,12 +28,12 @@ export const router = createBrowserRouter([
             element: <HomePage />,
           },
           {
-            path: "/user",
+            path: "/user/:id",
             element: protect(<UserAccount />),
           },
 
           {
-            path: "/admin",
+            path: "/admin/:id",
             element: protect(<Admin />),
           },
           {
@@ -47,6 +47,10 @@ export const router = createBrowserRouter([
           {
             path: "/signin",
             element: <SignIn />,
+          },
+          {
+            path: "/collection/:id",
+            element: <MoreCollection />,
           },
         ],
       },

@@ -50,7 +50,7 @@ const MenuItemForNavBar = () => {
           <div>
             <MenuItem
               onClick={() => {
-                navigate("/user");
+                navigate(`/user/${user.id}`);
                 handleClose();
               }}
             >
@@ -58,7 +58,7 @@ const MenuItemForNavBar = () => {
             </MenuItem>
             <MenuItem
               onClick={() => {
-                navigate("/admin");
+                navigate(`/admin/${user.id}`);
                 handleClose();
               }}
             >
