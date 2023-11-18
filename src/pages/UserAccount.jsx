@@ -7,6 +7,7 @@ import { Avatar } from "@mui/material";
 import { useState } from "react";
 import CollectionTable from "../components/UserAccount/Collections/CollectionTable";
 import userStore from "../stores/userStore";
+import api from "../api/http";
 
 const UserAccount = () => {
   const { user } = userStore();
@@ -14,6 +15,27 @@ const UserAccount = () => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleEditPhotoClick = async (e) => {
+    const file = e.target.files[0];
+
+    try {
+      e.preventDefault();
+      if (!file) {
+        console.error("No image selected");
+        return;
+      }
+      const formData = new FormData();
+      formData.append("file", file);
+      await api.post("create_avatar", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -40,24 +62,36 @@ const UserAccount = () => {
               <Avatar
                 sx={{ width: 200, height: 200 }}
                 alt="Remy Sharp"
-                src="/static/images/avatar/1.jpg"
+                src={user.avatar}
               />
               <div className="flex flex-col gap-10 mt-6">
                 <span className="font-semibold">
                   Full name: {user.first_name} {user.last_name}
                 </span>
                 <span className="font-semibold">Email: {user.email}</span>
-                <LoadingButton size="small" variant="contained">
-                  Edit photo
-                </LoadingButton>
+                <label htmlFor="imageInput">
+                  <LoadingButton
+                    component="label"
+                    size="small"
+                    variant="contained"
+                  >
+                    Edit photo
+                    <input
+                      type="file"
+                      className="hidden-file-input"
+                      accept="image/*"
+                      onChange={handleEditPhotoClick}
+                    />
+                  </LoadingButton>
+                </label>
               </div>
             </div>
           </TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
+          <TabPanel value="2">Soon...</TabPanel>
           <TabPanel className="max-w-[900px] w-full" value="3">
             <CollectionTable />
           </TabPanel>
-          <TabPanel value="4">Item Three</TabPanel>
+          <TabPanel value="4">Soon...</TabPanel>
         </TabContext>
       </div>
     </div>

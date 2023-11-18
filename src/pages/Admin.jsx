@@ -5,6 +5,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import AdminPanel from "../components/Admin/AdminPanel";
 import userStore from "../stores/userStore";
+import { useRedirectIfNotAdmin } from "../hooks";
 
 const Admin = () => {
   const { user } = userStore();
@@ -13,6 +14,8 @@ const Admin = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useRedirectIfNotAdmin();
 
   return (
     <div className="flex flex-col justify-center max-w-[1200px] mx-auto my-[80px] border p-10 rounded-lg shadow-lg">
@@ -36,8 +39,8 @@ const Admin = () => {
             <TabPanel value="1">
               <AdminPanel />
             </TabPanel>
-            <TabPanel value="2">Item Two</TabPanel>
-            <TabPanel value="3">Item Three</TabPanel>
+            <TabPanel value="2">Soon...</TabPanel>
+            <TabPanel value="3">Soon...</TabPanel>
           </TabContext>
         </div>
       </div>

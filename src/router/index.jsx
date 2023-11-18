@@ -10,6 +10,7 @@ import AuthGuard from "../guards/AuthGuard.jsx";
 import UserAccount from "../pages/UserAccount.jsx";
 import HomePage from "../pages/HomePage.jsx";
 import MoreCollection from "../pages/MoreCollection.jsx";
+import ErrorPage from "../pages/ErrorPage.jsx";
 
 const protect = (c) => <AuthGuard component={c} />;
 
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    // errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -28,12 +29,12 @@ export const router = createBrowserRouter([
             element: <HomePage />,
           },
           {
-            path: "/user/:id",
+            path: "/user/:username",
             element: protect(<UserAccount />),
           },
 
           {
-            path: "/admin/:id",
+            path: "/admin/:username",
             element: protect(<Admin />),
           },
           {
