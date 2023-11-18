@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import api from "../../../api/http";
 import MediaCard from "../MediaCard";
 import CreateCollectionButtons from "./CreateCollectionButtons";
@@ -8,7 +8,7 @@ const CollectionTable = () => {
   const [collections, setCollections] = useState([]);
   const { user } = userStore();
 
-  const getCollections = async () => {
+  const getCollections = useCallback(async () => {
     try {
       const { data } = await api.get("collections", {
         params: {
@@ -19,11 +19,11 @@ const CollectionTable = () => {
     } catch (error) {
       console.error;
     }
-  };
+  }, [user.id]);
 
   useEffect(() => {
     getCollections();
-  }, []);
+  }, [getCollections]);
 
   return (
     <section>

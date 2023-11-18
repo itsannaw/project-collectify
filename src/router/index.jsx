@@ -11,6 +11,7 @@ import UserAccount from "../pages/UserAccount.jsx";
 import HomePage from "../pages/HomePage.jsx";
 import MoreCollection from "../pages/MoreCollection.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
+import AddEditCollection from "../pages/AddEditCollection.jsx";
 
 const protect = (c) => <AuthGuard component={c} />;
 
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
           {
             path: "/create-collection",
             element: protect(<CreateCollection />),
+          },
+          {
+            path: "/edit-collection/:id",
+            element: protect(<AddEditCollection isEdit={true} />),
           },
           {
             path: "/contact",

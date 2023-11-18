@@ -1,8 +1,8 @@
 import { Button, Input } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-function ImageUpload({ setValue }) {
+function ImageUpload({ defaultValue, setValue }) {
   const [src, setSrc] = useState("");
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -15,6 +15,14 @@ function ImageUpload({ setValue }) {
       reader.readAsDataURL(file);
     }
   };
+  const updateByDefaultValue = useCallback(async () => {
+    if (defaultValue) {
+      setSrc(defaultValue);
+    }
+  }, [defaultValue]);
+  useEffect(() => {
+    updateByDefaultValue();
+  }, [updateByDefaultValue]);
 
   return (
     <>

@@ -20,7 +20,7 @@ const userStore = create(
         }
       },
       setAdmin: (value) => {
-        set({ user: {...get().user, admin: value} });
+        set({ user: { ...get().user, admin: value } });
       },
       getUser: async () => {
         set({ loading: true });

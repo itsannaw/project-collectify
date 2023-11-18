@@ -6,6 +6,7 @@ import TabPanel from "@mui/lab/TabPanel";
 import AdminPanel from "../components/Admin/AdminPanel";
 import userStore from "../stores/userStore";
 import { useRedirectIfNotAdmin } from "../hooks";
+import AllCollection from "../components/Admin/AllCollection";
 
 const Admin = () => {
   const { user } = userStore();
@@ -21,9 +22,7 @@ const Admin = () => {
     <div className="flex flex-col justify-center max-w-[1200px] mx-auto my-[80px] border p-10 rounded-lg shadow-lg">
       <div className="flex flex-col justify-center items-center gap-2">
         <div className="flex flex-col gap-2 items-center">
-          <span className="font-semibold">
-            Hello, {user.first_name}!
-          </span>
+          <span className="font-semibold">Hello, {user.first_name}!</span>
           <span>
             This is the user and content management dashboard for the site.
           </span>
@@ -39,7 +38,9 @@ const Admin = () => {
             <TabPanel value="1">
               <AdminPanel />
             </TabPanel>
-            <TabPanel value="2">Soon...</TabPanel>
+            <TabPanel value="2">
+              <AllCollection />
+            </TabPanel>
             <TabPanel value="3">Soon...</TabPanel>
           </TabContext>
         </div>

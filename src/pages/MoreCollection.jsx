@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import api from "../api/http";
-import MediaCard from "../components/UserAccount/MediaCard";
 import MarkdownPreview from "@uiw/react-markdown-preview";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getDateTime } from "../helpers/date-utils";
-import { Checkbox, Rating } from "@mui/material";
+import { Button, Checkbox, Rating } from "@mui/material";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 const MoreCollection = () => {
+  const navigate = useNavigate();
   const [collections, setCollections] = useState([]);
 
-  let { id } = useParams();
+  const { id } = useParams();
 
   const getCollections = useCallback(async () => {
     try {
@@ -22,12 +22,33 @@ const MoreCollection = () => {
     }
   }, [id]);
 
+  const deleteCollection = async () => {
+    try {
+      await api.delete(`collection/${id}`);
+      navigate("/");
+    } catch (error) {
+      console.error;
+    }
+  };
+
   useEffect(() => {
     getCollections();
   }, [getCollections]);
 
   return (
-    <div className="flex max-w-[1400px]  mx-auto justify-center border rounded-xl shadow-lg m-10 p-5">
+    <div className="flex flex-col items-center relative max-w-[1400px]  mx-auto border rounded-xl shadow-lg m-10 p-5">
+      <div className="flex absolute right-5">
+        <Button
+          color="warning"
+          onClick={() => navigate(`/edit-collection/${id}`)}
+        >
+          Edit
+        </Button>
+        <Button color="error" onClick={deleteCollection}>
+          Delete
+        </Button>
+      </div>
+
       <div className="flex flex-col items-center gap-5 max-w-[800px] w-full border rounded-xl p-5">
         <div className="flex relative justify-center w-full items-start">
           <div className="absolute left-0">
@@ -75,8 +96,8 @@ const MoreCollection = () => {
           </span>
         </div>
       </div>
-      <div className="flex justify-center items-center gap-5 mt-10">
-        <MediaCard />
+      <div className="flex flex-col items-center gap-5 mt-10">
+        <Button>Add item</Button>
       </div>
     </div>
   );
