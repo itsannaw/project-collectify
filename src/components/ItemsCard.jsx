@@ -9,7 +9,9 @@ const ItemsCard = ({ options }) => {
             key={option.id}
           >
             <div className="flex">
-              <span>{option.title}</span>
+              <span>
+                <b>Title:</b> {option.title}
+              </span>
             </div>
           </div>
         ))}

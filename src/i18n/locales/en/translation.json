@@ -1,9 +1,27 @@
 {
     "translation": {
-        "title": "Welcome to My Website",
-        "content": "This is the content in English.",
         "collection": {
             "add": "Add to your collection"
+        },
+        "admin": {
+            "block": "Block",
+            "unblock": "Unblock",
+            "delete": "Delete",
+            "set_admin": "Set Admin",
+            "unset_admin": "Unset Admin"
+        },
+        "admin_table": {
+            "id": "ID",
+            "username": "Username",
+            "email": "Email",
+            "reg": "Registration",
+            "log": "Login",
+            "status": "Status",
+            "blocked": "Blocked",
+            "not_blocked": "Not blocked",
+            "adm": "Admin",
+            "y": "Yes",
+            "n": "No"
         }
     }
 }

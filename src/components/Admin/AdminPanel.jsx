@@ -9,8 +9,10 @@ import { useEffect, useState } from "react";
 import api from "../../api/http";
 import UserColumnTable from "./UserColumnTable";
 import userStore from "../../stores/userStore";
+import { useTranslation } from "react-i18next";
 
 const AdminPanel = () => {
+  const { t } = useTranslation();
   const [rows, setRows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedIds, setSelectedIds] = useState([]);
@@ -105,7 +107,7 @@ const AdminPanel = () => {
               onClick={onBlock}
               disabled={!selectedIds.length}
             >
-              Block
+              {t("admin.block")}
             </Button>
             <Button
               color="success"
@@ -113,7 +115,7 @@ const AdminPanel = () => {
               onClick={onUnblock}
               disabled={!selectedIds.length}
             >
-              Unblock
+              {t("admin.unblock")}
             </Button>
             <Button
               color="error"
@@ -121,7 +123,7 @@ const AdminPanel = () => {
               onClick={onDelete}
               disabled={!selectedIds.length}
             >
-              Delete
+              {t("admin.delete")}
             </Button>
           </div>
           <div>
@@ -131,7 +133,7 @@ const AdminPanel = () => {
               onClick={onSetAdmin}
               disabled={!selectedIds.length}
             >
-              Set Admin
+              {t("admin.set_admin")}
             </Button>
             <Button
               color="secondary"
@@ -139,7 +141,7 @@ const AdminPanel = () => {
               onClick={onUnsetAdmin}
               disabled={!selectedIds.length}
             >
-              Unset Admin
+              {t("admin.unset_admin")}
             </Button>
           </div>
         </div>
@@ -149,7 +151,7 @@ const AdminPanel = () => {
         >
           <DataGrid
             rows={rows}
-            columns={UserColumnTable}
+            columns={UserColumnTable()}
             checkboxSelection
             slots={{
               loadingOverlay: LinearProgress,

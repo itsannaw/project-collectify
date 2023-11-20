@@ -11,7 +11,7 @@ import ItemsCard from "../components/ItemsCard";
 const MoreCollection = () => {
   const navigate = useNavigate();
   const [collections, setCollections] = useState([]);
-  // const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]);
   const { id } = useParams();
 
   const getCollections = useCallback(async () => {
@@ -32,10 +32,19 @@ const MoreCollection = () => {
     }
   };
 
+  const getItems = useCallback(async () => {
+    try {
+      const { data } = await api.get(`items/${id}`);
+      setItems(data);
+    } catch (error) {
+      console.error;
+    }
+  }, [id]);
 
   useEffect(() => {
     getCollections();
-  }, [getCollections]);
+    getItems();
+  }, [getCollections, getItems]);
 
   return (
     <div className="flex flex-col items-center relative max-w-[1400px]  mx-auto border rounded-xl shadow-lg m-10 p-5">
@@ -105,7 +114,9 @@ const MoreCollection = () => {
           Add item
         </Button>
       </div>
-      <ItemsCard />
+      <div>
+      <ItemsCard options={items} />
+      </div>
     </div>
   );
 };

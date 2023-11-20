@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Autocomplete, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,6 +9,7 @@ const CreateItem = () => {
   const { user } = userStore();
   const navigate = useNavigate();
   const { id } = useParams();
+  const [tags, setTags] = useState([]);
   const [forms, setForms] = useState({
     title: "",
     user_id: user.id,
@@ -23,13 +24,16 @@ const CreateItem = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log(tags);
     try {
       e.preventDefault();
-      await api.post("item", { ...forms });
-      navigate(-1);
+      await api.post("items", { ...forms, tags });
     } catch (error) {
       console.error(error);
     }
+  };
+  const handleChangeTags = (e, tags) => {
+    setTags(tags);
   };
 
   return (
@@ -45,6 +49,25 @@ const CreateItem = () => {
             name="title"
             value={forms.title}
             required
+          />
+          <span className="font-bold">Tags*</span>
+          <Autocomplete
+            style={{ margin: "10px 0" }}
+            multiple
+            id="tags-outlined"
+            options={[]}
+            freeSolo
+            autoSelect
+            value={tags} // Make sure to set the value prop correctly
+            onChange={handleChangeTags}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Tags"
+                placeholder="Tags"
+                value={tags}
+              />
+            )}
           />
         </div>
         <div className="flex justify-center">

@@ -1,8 +1,13 @@
 import { getDateTime } from "../../helpers/date-utils";
+import i18next from "i18next";
 
-const UserColumnTable = [
-  { field: "id", headerName: "ID", width: 50 },
-  { field: "username", headerName: "Username", width: 150 },
+const UserColumnTable = () => [
+  { field: "id", headerName: i18next.t("admin_table.id"), width: 50 },
+  {
+    field: "username",
+    headerName: i18next.t("admin_table.username"),
+    width: 150,
+  },
   { field: "email", headerName: "Email", width: 150 },
   {
     field: "created_at",
