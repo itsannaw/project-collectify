@@ -6,11 +6,12 @@ import { getDateTime } from "../helpers/date-utils";
 import { Button, Checkbox, Rating } from "@mui/material";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
+import ItemsCard from "../components/ItemsCard";
 
 const MoreCollection = () => {
   const navigate = useNavigate();
   const [collections, setCollections] = useState([]);
-
+  // const [items, setItems] = useState([]);
   const { id } = useParams();
 
   const getCollections = useCallback(async () => {
@@ -30,6 +31,7 @@ const MoreCollection = () => {
       console.error;
     }
   };
+
 
   useEffect(() => {
     getCollections();
@@ -103,6 +105,7 @@ const MoreCollection = () => {
           Add item
         </Button>
       </div>
+      <ItemsCard />
     </div>
   );
 };
