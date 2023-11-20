@@ -8,6 +8,7 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { IconButton } from "@mui/material";
 import themeStore from "../../stores/themeStore";
 import { useCallback } from "react";
+import LanguageSelector from "./LanguageSelector";
 
 export default function NavBar() {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ export default function NavBar() {
             <SearchField />
           </div>
           <div className="flex">
+            <LanguageSelector />
             <IconButton onClick={toggleTheme}>
               {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
