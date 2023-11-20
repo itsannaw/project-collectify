@@ -3,13 +3,23 @@ import { useNavigate } from "react-router-dom";
 import MenuItemForNavBar from "./MenuItemForNavBar";
 import BasicMenuForNavBar from "./BasicMenuForNavBar";
 import SearchField from "./SearchField";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { IconButton } from "@mui/material";
+import themeStore from "../../stores/themeStore";
+import { useCallback } from "react";
 
 export default function NavBar() {
   const navigate = useNavigate();
+  const { mode, setMode } = themeStore();
 
   const handleHome = () => {
     navigate("/");
   };
+
+  const toggleTheme = useCallback(() => {
+    setMode(mode === "light" ? "dark" : "light");
+  }, [mode, setMode]);
 
   return (
     <nav className="flex justify-between items-center">
@@ -28,7 +38,12 @@ export default function NavBar() {
             </button>
             <SearchField />
           </div>
-          <MenuItemForNavBar />
+          <div className="flex">
+            <IconButton onClick={toggleTheme}>
+              {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
+            <MenuItemForNavBar />
+          </div>
         </div>
       </AppBar>
     </nav>

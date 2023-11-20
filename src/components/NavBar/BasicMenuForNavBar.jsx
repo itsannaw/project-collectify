@@ -23,7 +23,6 @@ export default function BasicMenuForNavBar() {
         onClick={handleClick}
         size="large"
         edge="start"
-        color="inherit"
         aria-label="menu"
       >
         <MenuIcon />

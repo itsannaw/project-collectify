@@ -27,7 +27,7 @@ const UserColumnTable = [
         {params.value ? (
           <span className="text-red-700">Blocked</span>
         ) : (
-          <span className="text-green-800">Not blocked</span>
+          <span className="text-green-700">Not blocked</span>
         )}
       </>
     ),
@@ -39,7 +39,7 @@ const UserColumnTable = [
     renderCell: (params) => (
       <>
         {params.value ? (
-          <span className="text-green-800">Yes</span>
+          <span className="text-green-700">Yes</span>
         ) : (
           <span className="text-red-700">No</span>
         )}

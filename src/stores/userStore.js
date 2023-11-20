@@ -31,6 +31,9 @@ const userStore = create(
           set({ error, loading: false });
         }
       },
+      setUser: (prop, value) => {
+        set({ user: { ...get().user, [prop]: value } });
+      },
       getUserIfToken: async () => {
         const token = Cookies.get("token");
         if (token) {

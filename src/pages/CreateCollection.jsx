@@ -9,10 +9,8 @@ import { useNavigate } from "react-router-dom";
 import AdaptiveFields from "../components/UserAccount/Collections/AdaptiveFields";
 import { OPTIONAL_FIELDS } from "../const/collections";
 import { getFormData } from "../helpers";
-import userStore from "../stores/userStore";
 
 const CreateCollection = () => {
-  const { user } = userStore();
   const navigate = useNavigate();
   const [forms, setForms] = useState({
     title: "",
@@ -42,7 +40,7 @@ const CreateCollection = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      navigate(`user/${user.username}`);
+      navigate(-1);
     } catch (error) {
       console.error(error);
     }

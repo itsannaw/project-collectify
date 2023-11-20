@@ -76,7 +76,9 @@ const MoreCollection = () => {
           </div>
         </div>
         <span className="text-xl font-bold">{collections?.title}</span>
+
         <MarkdownPreview source={collections?.desc} />
+
         <div className="flex flex-col gap-3 justify-start w-full">
           <span>
             <b>Theme:</b> {collections?.category?.title}
@@ -97,7 +99,9 @@ const MoreCollection = () => {
         </div>
       </div>
       <div className="flex flex-col items-center gap-5 mt-10">
-        <Button>Add item</Button>
+        <Button onClick={() => navigate(`/collection/${id}/create-item`)}>
+          Add item
+        </Button>
       </div>
     </div>
   );

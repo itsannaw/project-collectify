@@ -12,6 +12,7 @@ import HomePage from "../pages/HomePage.jsx";
 import MoreCollection from "../pages/MoreCollection.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
 import AddEditCollection from "../pages/AddEditCollection.jsx";
+import CreateItem from "../pages/CreateItem.jsx";
 
 const protect = (c) => <AuthGuard component={c} />;
 
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
           {
             path: "/edit-collection/:id",
             element: protect(<AddEditCollection isEdit={true} />),
+          },
+          {
+            path: "/collection/:id/create-item",
+            element: protect(<CreateItem />),
           },
           {
             path: "/contact",

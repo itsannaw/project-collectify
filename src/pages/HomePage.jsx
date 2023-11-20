@@ -1,4 +1,4 @@
-import FavoriteTag from "../components/Home/FavouriteTag";
+import FavouriteTag from "../components/Home/FavouriteTag";
 import SortingBy from "../components/Home/SortingBy";
 import MediaCard from "../components/UserAccount/MediaCard";
 
@@ -8,8 +8,7 @@ const HomePage = () => {
       <div className="flex justify-center items-center mt-10 gap-5">
         <span className="text-l">Add to your collection</span>
         <SortingBy />
-        <FavoriteTag />
-        <span></span>
+        <FavouriteTag />
       </div>
       <div className="flex justify-center items-center gap-5 mt-10">
         <MediaCard />

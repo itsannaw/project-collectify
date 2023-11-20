@@ -10,7 +10,7 @@ import userStore from "../stores/userStore";
 import api from "../api/http";
 
 const UserAccount = () => {
-  const { user } = userStore();
+  const { user, setUser } = userStore();
   const [value, setValue] = useState("1");
 
   const handleChange = (event, newValue) => {
@@ -28,11 +28,12 @@ const UserAccount = () => {
       }
       const formData = new FormData();
       formData.append("file", file);
-      await api.post("create_avatar", formData, {
+      const { data } = await api.post("create_avatar", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+      setUser("avatar", data.avatar);
     } catch (error) {
       console.error(error);
     }
