@@ -9,7 +9,9 @@ import CreateCollection from "../pages/CreateCollection.jsx";
 import AuthGuard from "../guards/AuthGuard.jsx";
 import UserAccount from "../pages/UserAccount.jsx";
 import HomePage from "../pages/HomePage.jsx";
-
+import MoreCollection from "../pages/MoreCollection.jsx";
+import ErrorPage from "../pages/ErrorPage.jsx";
+import AddEditCollection from "../pages/AddEditCollection.jsx";
 
 const protect = (c) => <AuthGuard component={c} />;
 
@@ -17,7 +19,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    // errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -28,17 +30,21 @@ export const router = createBrowserRouter([
             element: <HomePage />,
           },
           {
-            path: "/user",
+            path: "/user/:username",
             element: protect(<UserAccount />),
           },
 
           {
-            path: "/admin",
+            path: "/admin/:username",
             element: protect(<Admin />),
           },
           {
             path: "/create-collection",
             element: protect(<CreateCollection />),
+          },
+          {
+            path: "/edit-collection/:id",
+            element: protect(<AddEditCollection isEdit={true} />),
           },
           {
             path: "/contact",
@@ -47,6 +53,10 @@ export const router = createBrowserRouter([
           {
             path: "/signin",
             element: <SignIn />,
+          },
+          {
+            path: "/collection/:id",
+            element: <MoreCollection />,
           },
         ],
       },

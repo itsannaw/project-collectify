@@ -19,6 +19,9 @@ const userStore = create(
           set({ error, loading: false });
         }
       },
+      setAdmin: (value) => {
+        set({ user: { ...get().user, admin: value } });
+      },
       getUser: async () => {
         set({ loading: true });
         try {

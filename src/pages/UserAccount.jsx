@@ -6,20 +6,44 @@ import { LoadingButton } from "@mui/lab";
 import { Avatar } from "@mui/material";
 import { useState } from "react";
 import CollectionTable from "../components/UserAccount/Collections/CollectionTable";
+import userStore from "../stores/userStore";
+import api from "../api/http";
 
 const UserAccount = () => {
+  const { user } = userStore();
   const [value, setValue] = useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const handleEditPhotoClick = async (e) => {
+    const file = e.target.files[0];
+
+    try {
+      e.preventDefault();
+      if (!file) {
+        console.error("No image selected");
+        return;
+      }
+      const formData = new FormData();
+      formData.append("file", file);
+      await api.post("create_avatar", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <div className="flex flex-col justify-center max-w-[1000px] mx-auto my-[70px] border p-10 rounded-lg shadow-lg">
+    <div className="flex flex-col justify-center max-w-[1200px] mx-auto my-[70px] border p-10 rounded-lg shadow-lg">
       <div className="flex flex-col justify-center items-center gap-2">
         <div className="flex gap-2 items-center">
           <span className="font-bold text-xl">Hi!</span>
-          <img className="w-[20px] h-[20px]" src="hi.svg" alt="" />
+          <img className="w-[20px] h-[20px]" src="/hi.svg" alt="" />
         </div>
         <span>
           This is your personal account, here you can get various information
@@ -38,22 +62,36 @@ const UserAccount = () => {
               <Avatar
                 sx={{ width: 200, height: 200 }}
                 alt="Remy Sharp"
-                src="/static/images/avatar/1.jpg"
+                src={user.avatar}
               />
               <div className="flex flex-col gap-10 mt-6">
-                <span className="font-semibold">Full name: </span>
-                <span className="font-semibold">Email: user@mail.ru</span>
-                <LoadingButton size="small" variant="contained">
-                  Edit photo
-                </LoadingButton>
+                <span className="font-semibold">
+                  Full name: {user.first_name} {user.last_name}
+                </span>
+                <span className="font-semibold">Email: {user.email}</span>
+                <label htmlFor="imageInput">
+                  <LoadingButton
+                    component="label"
+                    size="small"
+                    variant="contained"
+                  >
+                    Edit photo
+                    <input
+                      type="file"
+                      className="hidden-file-input"
+                      accept="image/*"
+                      onChange={handleEditPhotoClick}
+                    />
+                  </LoadingButton>
+                </label>
               </div>
             </div>
           </TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
-          <TabPanel value="3">
+          <TabPanel value="2">Soon...</TabPanel>
+          <TabPanel className="max-w-[900px] w-full" value="3">
             <CollectionTable />
           </TabPanel>
-          <TabPanel value="4">Item Three</TabPanel>
+          <TabPanel value="4">Soon...</TabPanel>
         </TabContext>
       </div>
     </div>

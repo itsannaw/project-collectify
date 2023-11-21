@@ -3,24 +3,28 @@ import ListSelection from "../components/UserAccount/Collections/ListSelection";
 import MarkdownField from "../components/UserAccount/Collections/MarkdownField";
 import UploadImages from "../components/UserAccount/Collections/UploadImages";
 import { LoadingButton } from "@mui/lab";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import api from "../api/http";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AdaptiveFields from "../components/UserAccount/Collections/AdaptiveFields";
 import { OPTIONAL_FIELDS } from "../const/collections";
 import { getFormData } from "../helpers";
-import userStore from "../stores/userStore";
+import collectionStore from "../stores/collectionStore";
 
-const CreateCollection = () => {
-  const { user } = userStore();
+const DEFAULT_FORM_STATE = {
+  title: "",
+  desc: "",
+  file: "",
+  category_id: "",
+  user_id: "",
+};
+
+const AddEditCollection = ({ isEdit }) => {
+  const { collection, getCollection } = collectionStore();
   const navigate = useNavigate();
-  const [forms, setForms] = useState({
-    title: "",
-    desc: "",
-    file: "",
-    category_id: "",
-    user_id: "",
-  });
+  const { id } = useParams();
+
+  const [forms, setForms] = useState({ ...DEFAULT_FORM_STATE });
 
   const handleFormItemChange = (prop, value) => {
     setForms({
@@ -37,12 +41,12 @@ const CreateCollection = () => {
     try {
       e.preventDefault();
       const formData = getFormData(forms);
-      await api.post("collection", formData, {
+      await api.put(`collection/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      navigate(`user/${user.username}`);
+      navigate(`collection/${id}`);
     } catch (error) {
       console.error(error);
     }
@@ -57,15 +61,28 @@ const CreateCollection = () => {
       console.error;
     }
   };
+  const getDataOnMounted = useCallback(async () => {
+    await Promise.all([getCategories(), getCollection(id)]);
+  }, [getCollection, id]);
 
   useEffect(() => {
-    getCategories();
-  }, []);
+    getDataOnMounted();
+  }, [getDataOnMounted]);
+
+  useEffect(() => {
+    if (collection) {
+      setForms(collection);
+    } else {
+      setForms({ ...DEFAULT_FORM_STATE });
+    }
+  }, [collection]);
 
   return (
     <div className="flex flex-col items-center justify-center mt-5 gap-8 p-5">
       <span className="text-[18px] font-bold">
-        Here you can create your new collection!
+        {isEdit
+          ? "Edit collection"
+          : "Here you can create your new collection!"}
       </span>
       <div className="flex flex-col gap-5 ">
         <div className="flex flex-col gap-2">
@@ -95,7 +112,10 @@ const CreateCollection = () => {
         </div>
         <div className="flex flex-col gap-2">
           <span className="font-bold">Picture*</span>
-          <UploadImages setValue={(e) => handleFormItemChange("file", e)} />
+          <UploadImages
+            defaultValue={collection?.image_url}
+            setValue={(e) => handleFormItemChange("file", e)}
+          />
         </div>
       </div>
       <div className="flex flex-col items-center gap-3">
@@ -120,11 +140,11 @@ const CreateCollection = () => {
       </div>
       <div className="flex justify-center">
         <LoadingButton onClick={handleSubmit} method="post" variant="contained">
-          Create
+          {isEdit ? "Edit" : "Create"}
         </LoadingButton>
       </div>
     </div>
   );
 };
 
-export default CreateCollection;
+export default AddEditCollection;

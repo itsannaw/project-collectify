@@ -24,7 +24,7 @@ export default function NavBar() {
               <span className="text-xl font-semibold drop-shadow-xl">
                 COLLECTIFY
               </span>
-              <img className="h-[45px] w-[45px]" src="bar.svg" alt="" />
+              <img className="h-[45px] w-[45px]" src="/bar.svg" alt="" />
             </button>
             <SearchField />
           </div>
