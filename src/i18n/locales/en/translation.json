@@ -1,8 +1,5 @@
 {
     "translation": {
-        "collection": {
-            "add": "Add to your collection"
-        },
         "admin": {
             "block": "Block",
             "unblock": "Unblock",
@@ -33,7 +30,8 @@
         },
         "basic_menu": {
             "home": "Homepage",
-            "contact": "Contact us"
+            "contact": "Contact us",
+            "search": "Search..."
         },
         "menu_item": {
             "account": "My account",
@@ -44,6 +42,24 @@
         "contact_us": {
             "contact1": "If you encounter any issues or have valuable suggestions for the improvement of our site",
             "contact2": "please feel free to reach out to us via email at"
+        },
+        "home": {
+            "tags": "Tags",
+            "sort": "Sort by...",
+            "last": "Last added items",
+            "large": "The 5 largest collections"
+        },
+        "user": {
+            "hi": "Hi!",
+            "desc": "This is your personal account, here you can get various information about the collections you like and also create your own!",
+            "profile": "Profile",
+            "fav": "Favourite",
+            "collec": "Your collections",
+            "settings": "Settings",
+            "email": "Email:",
+            "name": "Full name:",
+            "edit": "Edit photo",
+            "soon": "Soon..."
         }
     }
 }

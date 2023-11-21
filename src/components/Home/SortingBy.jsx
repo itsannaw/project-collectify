@@ -4,8 +4,10 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const SortingBy = () => {
+  const { t } = useTranslation();
   const [sort, setSort] = useState("10");
 
   const handleChange = (event) => {
@@ -15,17 +17,17 @@ const SortingBy = () => {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="sort-select">Sort by...</InputLabel>
+        <InputLabel id="sort-select">{t("home.sort")}</InputLabel>
         <Select
           labelId="sort"
           id="sort-select"
           value={sort}
-          label="Sort by..."
+          label={t("home.sort")}
           size="small"
           onChange={handleChange}
         >
-          <MenuItem value={10}>Last added items</MenuItem>
-          <MenuItem value={20}>The 5 largest collections</MenuItem>
+          <MenuItem value={10}>{t("home.last")}</MenuItem>
+          <MenuItem value={20}>{t("home.large")}</MenuItem>
         </Select>
       </FormControl>
     </Box>

@@ -114,7 +114,7 @@ const MoreCollection = () => {
           Add item
         </Button>
       </div>
-      <div>
+      <div className="flex flex-col gap-5">
         <ItemsCard options={items} />
       </div>
     </div>

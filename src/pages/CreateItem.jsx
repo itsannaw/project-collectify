@@ -1,6 +1,6 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import userStore from "../stores/userStore";
 import api from "../api/http";
@@ -10,11 +10,25 @@ const CreateItem = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [tags, setTags] = useState([]);
+  const [tips, setTips] = useState([]);
   const [forms, setForms] = useState({
     title: "",
     user_id: user.id,
     collection_id: id,
   });
+
+  const getTags = async () => {
+    try {
+      const { data } = await api.get("tags");
+      setTips(data.map((tag) => tag.title));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getTags();
+  }, []);
 
   const handleChange = (e) => {
     setForms({
@@ -31,6 +45,7 @@ const CreateItem = () => {
       console.error(error);
     }
   };
+
   const handleChangeTags = (e, tags) => {
     setTags(tags);
   };
@@ -54,7 +69,7 @@ const CreateItem = () => {
             style={{ margin: "10px 0" }}
             multiple
             id="tags-outlined"
-            options={[]}
+            options={tips}
             freeSolo
             autoSelect
             value={tags}
