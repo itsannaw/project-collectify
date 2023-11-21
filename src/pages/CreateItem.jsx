@@ -1,14 +1,31 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import userStore from "../stores/userStore";
 import api from "../api/http";
+import collectionStore from "../stores/collectionStore";
+import { OPTIONAL_FIELDS_NAMES } from "../const/collections";
+import ItemIntField from "../components/UI/ItemIntField";
+import ItemStringField from "../components/UI/ItemStringField";
+import ItemTextField from "../components/UI/ItemTextField";
+import ItemBoolField from "../components/UI/ItemBoolField";
+import ItemDateField from "../components/UI/ItemDateField";
+
+const FIELDS_COUNTERS = [1, 2, 3];
+const getFieldName = (type, counter) => `${type}${counter}`;
+const COMPONENT_MAPPER = {
+  [OPTIONAL_FIELDS_NAMES.CUSTOM_STRING]: ItemStringField,
+  [OPTIONAL_FIELDS_NAMES.CUSTOM_BOOL]: ItemBoolField,
+  [OPTIONAL_FIELDS_NAMES.CUSTOM_DATE]: ItemDateField,
+  [OPTIONAL_FIELDS_NAMES.CUSTOM_TEXT]: ItemTextField,
+  [OPTIONAL_FIELDS_NAMES.CUSTOM_INT]: ItemIntField,
+};
 
 const CreateItem = () => {
   const { user } = userStore();
-  const navigate = useNavigate();
   const { id } = useParams();
+  const { collection, getCollection } = collectionStore();
   const [tags, setTags] = useState([]);
   const [tips, setTips] = useState([]);
   const [forms, setForms] = useState({
@@ -25,10 +42,14 @@ const CreateItem = () => {
       console.error(error);
     }
   };
+  const onMounted = useCallback(async () => {
+    await getTags();
+    await getCollection(id);
+  }, [getCollection, id]);
 
   useEffect(() => {
-    getTags();
-  }, []);
+    onMounted();
+  }, [onMounted]);
 
   const handleChange = (e) => {
     setForms({
@@ -49,6 +70,21 @@ const CreateItem = () => {
   const handleChangeTags = (e, tags) => {
     setTags(tags);
   };
+  const setCustomField = (type, count, v) => {
+    setForms({
+      ...forms,
+      [getFieldName(type, count)]: v,
+    });
+  };
+  const getInfo = (type, count) => {
+    if (!collection) return;
+
+    return {
+      enabled: collection[`${type}${count}_enabled`],
+      name: collection[`${type}${count}_name`],
+    };
+  };
+  const getLabel = (type, count) => getInfo(type, count).name;
 
   return (
     <div className="flex flex-col items-center justify-center mt-5 gap-8 p-5">
@@ -57,16 +93,15 @@ const CreateItem = () => {
       </span>
       <div className="flex flex-col gap-5 ">
         <div className="flex flex-col gap-2">
-          <span className="font-bold">Title*</span>
+          <span className="font-bold">Title</span>
           <TextField
             onChange={handleChange}
             name="title"
             value={forms.title}
             required
           />
-          <span className="font-bold">Tags*</span>
+          <span className="font-bold">Tags</span>
           <Autocomplete
-            style={{ margin: "10px 0" }}
             multiple
             id="tags-outlined"
             options={tips}
@@ -77,13 +112,25 @@ const CreateItem = () => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Tags"
-                placeholder="Tags"
                 value={tags}
               />
             )}
           />
         </div>
+        {Object.entries(COMPONENT_MAPPER).map(([type, Component]) => {
+          return FIELDS_COUNTERS.filter(
+            (count) => getInfo(type, count)?.enabled
+          ).map((count) => {
+            return (
+              <Component
+                key={count}
+                value={forms[getFieldName(type, count)]}
+                setValue={(v) => setCustomField(type, count, v)}
+                label={getLabel(type, count)}
+              />
+            );
+          });
+        })}
         <div className="flex justify-center">
           <LoadingButton
             onClick={handleSubmit}

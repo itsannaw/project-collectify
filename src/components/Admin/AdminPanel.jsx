@@ -100,7 +100,7 @@ const AdminPanel = () => {
     <div className="flex flex-col justify-between mx-auto">
       <div className="flex flex-col justify-center border max-w-[1400px] mx-auto  p-[15px] rounded-lg shadow-lg shadow-blue-500/50">
         <div className="flex justify-between gap-[8px]">
-          <div className="">
+          <div>
             <Button
               color="info"
               startIcon={<LockIcon />}

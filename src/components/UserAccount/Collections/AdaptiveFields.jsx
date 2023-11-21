@@ -3,7 +3,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { OPTIONAL_FIELDS_NAMES } from "../../../const/collections";
 
 const ITEM_IDS = {
@@ -11,6 +11,7 @@ const ITEM_IDS = {
   TWO: "2",
   THREE: "3",
 };
+const ITEM_IDS_ITER = Object.values(ITEM_IDS);
 
 const TITLE_MAPPER = {
   [OPTIONAL_FIELDS_NAMES.CUSTOM_STRING]: "String (short text)",
@@ -23,7 +24,7 @@ const TITLE_MAPPER = {
 const getName = (name, id, isText = false) =>
   `${name}${id}_${isText ? "name" : "enabled"}`;
 
-const AdaptiveFields = ({ setValue, name }) => {
+const AdaptiveFields = ({ value, setValue, name }) => {
   const defaultFields = Object.values(ITEM_IDS).reduce((acc, id) => {
     acc[getName(name, id)] = false;
     acc[getName(name, id, true)] = "";
@@ -45,6 +46,11 @@ const AdaptiveFields = ({ setValue, name }) => {
     },
     [name, setValue, fields]
   );
+  useEffect(() => {
+    if (value) {
+      setFields(value);
+    }
+  }, [value]);
   return (
     <div>
       <Accordion>
@@ -59,63 +65,28 @@ const AdaptiveFields = ({ setValue, name }) => {
         </AccordionSummary>
         <AccordionDetails>
           <div className="flex flex-col gap-3 items-center">
-            <div>
-              <Checkbox
-                checked={fields[getName(name, ITEM_IDS.ONE)]}
-                onChange={(e) =>
-                  handleChange({ v: e.target.checked, id: ITEM_IDS.ONE })
-                }
-              />
-              <TextField
-                size="small"
-                value={fields[getName(name, ITEM_IDS.ONE, true)]}
-                onChange={(e) =>
-                  handleChange({
-                    v: e.target.value,
-                    id: ITEM_IDS.ONE,
-                    isText: true,
-                  })
-                }
-              />
-            </div>
-            <div>
-              <Checkbox
-                checked={fields[getName(name, ITEM_IDS.TWO)]}
-                onChange={(e) =>
-                  handleChange({ v: e.target.checked, id: ITEM_IDS.TWO })
-                }
-              />
-              <TextField
-                size="small"
-                value={fields[getName(name, ITEM_IDS.TWO, true)]}
-                onChange={(e) =>
-                  handleChange({
-                    v: e.target.value,
-                    id: ITEM_IDS.TWO,
-                    isText: true,
-                  })
-                }
-              />
-            </div>
-            <div>
-              <Checkbox
-                checked={fields[getName(name, ITEM_IDS.THREE)]}
-                onChange={(e) =>
-                  handleChange({ v: e.target.checked, id: ITEM_IDS.THREE })
-                }
-              />
-              <TextField
-                size="small"
-                value={fields[getName(name, ITEM_IDS.THREE, true)]}
-                onChange={(e) =>
-                  handleChange({
-                    v: e.target.value,
-                    id: ITEM_IDS.THREE,
-                    isText: true,
-                  })
-                }
-              />
-            </div>
+            {ITEM_IDS_ITER.map((id) => {
+              return (
+                <div key={id}>
+                  <Checkbox
+                    checked={fields[getName(name, id)] || false}
+                    onChange={(e) => handleChange({ v: e.target.checked, id })}
+                    inputProps={{ "aria-label": "controlled" }}
+                  />
+                  <TextField
+                    size="small"
+                    value={fields[getName(name, id, true)] || ""}
+                    onChange={(e) =>
+                      handleChange({
+                        v: e.target.value,
+                        id,
+                        isText: true,
+                      })
+                    }
+                  />
+                </div>
+              );
+            })}
           </div>
         </AccordionDetails>
       </Accordion>

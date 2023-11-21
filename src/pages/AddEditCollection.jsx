@@ -46,7 +46,7 @@ const AddEditCollection = ({ isEdit }) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      navigate(`collection/${id}`);
+      navigate(`/collection/${id}`);
     } catch (error) {
       console.error(error);
     }
@@ -62,7 +62,8 @@ const AddEditCollection = ({ isEdit }) => {
     }
   };
   const getDataOnMounted = useCallback(async () => {
-    await Promise.all([getCategories(), getCollection(id)]);
+    await getCategories();
+    await getCollection(id);
   }, [getCollection, id]);
 
   useEffect(() => {
