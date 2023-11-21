@@ -4,8 +4,10 @@ import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function BasicMenuForNavBar() {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ export default function BasicMenuForNavBar() {
             handleClose();
           }}
         >
-          Homepage
+          {t("basic_menu.home")}
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -50,7 +52,7 @@ export default function BasicMenuForNavBar() {
             handleClose();
           }}
         >
-          Contact us
+          {t("basic_menu.contact")}
         </MenuItem>
       </Menu>
     </div>

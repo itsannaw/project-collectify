@@ -2,6 +2,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 import { useNavigate } from "react-router-dom";
 
 const MediaCard = ({ options }) => {
@@ -22,7 +23,9 @@ const MediaCard = ({ options }) => {
             />
             <CardContent className="flex flex-col w-full">
               <span className="font-bold">{option.title}</span>
-              <span className="truncate ">{option.desc}</span>
+              <div className="truncate ">
+                <MarkdownPreview source={option.desc} />
+              </div>
               <span>{option.theme}</span>
             </CardContent>
             <CardActions className="flex items-center justify-end">

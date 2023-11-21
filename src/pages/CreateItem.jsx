@@ -24,7 +24,6 @@ const CreateItem = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log(tags);
     try {
       e.preventDefault();
       await api.post("items", { ...forms, tags });
@@ -58,7 +57,7 @@ const CreateItem = () => {
             options={[]}
             freeSolo
             autoSelect
-            value={tags} // Make sure to set the value prop correctly
+            value={tags}
             onChange={handleChangeTags}
             renderInput={(params) => (
               <TextField

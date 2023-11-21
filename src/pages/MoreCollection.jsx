@@ -47,7 +47,7 @@ const MoreCollection = () => {
   }, [getCollections, getItems]);
 
   return (
-    <div className="flex flex-col items-center relative max-w-[1400px]  mx-auto border rounded-xl shadow-lg m-10 p-5">
+    <div className="flex flex-col items-center relative max-w-[1400px] gap-5 mx-auto border rounded-xl shadow-lg m-10 p-5">
       <div className="flex absolute right-5">
         <Button
           color="warning"
@@ -109,13 +109,13 @@ const MoreCollection = () => {
           </span>
         </div>
       </div>
-      <div className="flex flex-col items-center gap-5 mt-10">
+      <div className="flex flex-col items-center">
         <Button onClick={() => navigate(`/collection/${id}/create-item`)}>
           Add item
         </Button>
       </div>
       <div>
-      <ItemsCard options={items} />
+        <ItemsCard options={items} />
       </div>
     </div>
   );

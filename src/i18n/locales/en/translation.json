@@ -22,6 +22,28 @@
             "adm": "Admin",
             "y": "Yes",
             "n": "No"
+        },
+        "admin_panel": {
+            "hi": "Hello",
+            "desc": "This is the user and content management dashboard for the site.",
+            "label1": "All Users",
+            "label2": "All Collections",
+            "label3": "All Items",
+            "soon": "Soon"
+        },
+        "basic_menu": {
+            "home": "Homepage",
+            "contact": "Contact us"
+        },
+        "menu_item": {
+            "account": "My account",
+            "adm": "Admin panel",
+            "logout": "Logout",
+            "sign_in": "Sign In"
+        },
+        "contact_us": {
+            "contact1": "If you encounter any issues or have valuable suggestions for the improvement of our site",
+            "contact2": "please feel free to reach out to us via email at"
         }
     }
 }
