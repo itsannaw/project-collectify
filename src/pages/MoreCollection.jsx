@@ -3,10 +3,10 @@ import api from "../api/http";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { useNavigate, useParams } from "react-router-dom";
 import { getDateTime } from "../helpers/date-utils";
-import { Button, Checkbox, Rating } from "@mui/material";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
+import { Button, Rating } from "@mui/material";
 import ItemsCard from "../components/ItemsCard";
+import { useCheckUser } from "../hooks/useCheckUser";
+import { AlertButton } from "../components/UI/AlertButton";
 
 const MoreCollection = () => {
   const navigate = useNavigate();
@@ -46,18 +46,31 @@ const MoreCollection = () => {
     getItems();
   }, [getCollections, getItems]);
 
+  const { checkUser } = useCheckUser();
+
   return (
     <div className="flex flex-col items-center relative max-w-[1400px] gap-5 mx-auto border rounded-xl shadow-lg m-10 p-5">
       <div className="flex absolute right-5">
-        <Button
-          color="warning"
-          onClick={() => navigate(`/edit-collection/${id}`)}
-        >
-          Edit
-        </Button>
-        <Button color="error" onClick={deleteCollection}>
-          Delete
-        </Button>
+        {checkUser(collections?.user_id) && (
+          <>
+            <Button
+              color="warning"
+              onClick={() => navigate(`/edit-collection/${id}`)}
+            >
+              Edit
+            </Button>
+            <AlertButton
+              buttonComponent={Button}
+              buttonText="Delete"
+              buttonColor="error"
+              dialogTitle="Delete Collection"
+              dialogContent="Are you sure you want to delete this collection? This will also delete the items in this collection!"
+              onAgree={() => deleteCollection}
+              disagreeText="Cancel"
+              agreeText="Delete"
+            />
+          </>
+        )}
       </div>
 
       <div className="flex flex-col items-center gap-5 max-w-[800px] w-full border rounded-xl p-5">
@@ -77,14 +90,6 @@ const MoreCollection = () => {
             src={collections?.image_url}
             alt="#"
           />
-          <div className="absolute right-0">
-            <Checkbox
-              // {...label}
-              icon={<BookmarkBorderIcon />}
-              checkedIcon={<BookmarkIcon />}
-              color="error"
-            />
-          </div>
         </div>
         <span className="text-xl font-bold">{collections?.title}</span>
 
@@ -114,8 +119,8 @@ const MoreCollection = () => {
           Add item
         </Button>
       </div>
-      <div className="flex flex-col gap-5">
-        <ItemsCard options={items} />
+      <div className="flex flex-col max-w-2xl mx-auto w-full gap-5">
+        <ItemsCard setOptions={setItems} options={items} />
       </div>
     </div>
   );

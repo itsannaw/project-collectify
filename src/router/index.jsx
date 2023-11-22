@@ -13,6 +13,7 @@ import MoreCollection from "../pages/MoreCollection.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
 import AddEditCollection from "../pages/AddEditCollection.jsx";
 import CreateItem from "../pages/CreateItem.jsx";
+import MoreItem from "../pages/MoreItem.jsx";
 
 const protect = (c) => <AuthGuard component={c} />;
 
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
           {
             path: "/collection/:id/create-item",
             element: protect(<CreateItem />),
+          },
+          {
+            path: "/collection/:id/item/:itemId",
+            element: protect(<MoreItem />),
           },
           {
             path: "/contact",

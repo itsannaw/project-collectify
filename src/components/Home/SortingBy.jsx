@@ -12,7 +12,7 @@ const SortingBy = () => {
 
   const getCollections = async () => {
     try {
-      const { data } = await api.get("collections");
+      const { data } = await api.get("all_collections");
       setCollections(data);
     } catch (error) {
       console.error;

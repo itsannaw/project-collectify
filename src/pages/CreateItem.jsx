@@ -5,15 +5,14 @@ import { useParams } from "react-router-dom";
 import userStore from "../stores/userStore";
 import api from "../api/http";
 import collectionStore from "../stores/collectionStore";
-import { OPTIONAL_FIELDS_NAMES } from "../const/collections";
+import { FIELDS_COUNTERS, OPTIONAL_FIELDS_NAMES } from "../const/collections";
 import ItemIntField from "../components/UI/ItemIntField";
 import ItemStringField from "../components/UI/ItemStringField";
 import ItemTextField from "../components/UI/ItemTextField";
 import ItemBoolField from "../components/UI/ItemBoolField";
 import ItemDateField from "../components/UI/ItemDateField";
+import { getFieldName, getInfoByCollection } from "../helpers/collections";
 
-const FIELDS_COUNTERS = [1, 2, 3];
-const getFieldName = (type, counter) => `${type}${counter}`;
 const COMPONENT_MAPPER = {
   [OPTIONAL_FIELDS_NAMES.CUSTOM_STRING]: ItemStringField,
   [OPTIONAL_FIELDS_NAMES.CUSTOM_BOOL]: ItemBoolField,
@@ -77,12 +76,7 @@ const CreateItem = () => {
     });
   };
   const getInfo = (type, count) => {
-    if (!collection) return;
-
-    return {
-      enabled: collection[`${type}${count}_enabled`],
-      name: collection[`${type}${count}_name`],
-    };
+    return getInfoByCollection(type, count, collection);
   };
   const getLabel = (type, count) => getInfo(type, count).name;
 
@@ -109,12 +103,7 @@ const CreateItem = () => {
             autoSelect
             value={tags}
             onChange={handleChangeTags}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                value={tags}
-              />
-            )}
+            renderInput={(params) => <TextField {...params} value={tags} />}
           />
         </div>
         {Object.entries(COMPONENT_MAPPER).map(([type, Component]) => {

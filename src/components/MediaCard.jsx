@@ -23,7 +23,7 @@ const MediaCards = ({ option }) => {
         <div className="truncate">
           <MarkdownPreview source={option.desc} />
         </div>
-        <span>{option.theme}</span>
+        <span></span>
       </CardContent>
       <CardActions className="flex items-center justify-end">
         <Button

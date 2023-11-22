@@ -79,7 +79,7 @@ const AddEditCollection = ({ isEdit }) => {
   }, [collection]);
 
   return (
-    <div className="flex flex-col items-center justify-center mt-5 gap-8 p-5">
+    <div className="flex flex-col items-center max-w-[600px] mx-auto justify-center mt-5 gap-8 p-5">
       <span className="text-[18px] font-bold">
         {isEdit
           ? "Edit collection"
