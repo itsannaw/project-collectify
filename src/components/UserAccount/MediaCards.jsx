@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { useNavigate } from "react-router-dom";
 
-const MediaCard = ({ options }) => {
+const MediaCards = ({ options }) => {
   const navigate = useNavigate();
   return (
     <>
@@ -42,4 +42,4 @@ const MediaCard = ({ options }) => {
   );
 };
 
-export default MediaCard;
+export default MediaCards;

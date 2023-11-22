@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import api from "../../../api/http";
-import MediaCard from "../MediaCard";
+import MediaCards from "../MediaCards";
 import CreateCollectionButtons from "./CreateCollectionButtons";
 import userStore from "../../../stores/userStore";
 
@@ -31,7 +31,7 @@ const CollectionTable = () => {
         <CreateCollectionButtons />
       </div>
       <div className="flex max-w-[1000px] justify-between flex-wrap mt-6 gap-6">
-        <MediaCard options={collections} />
+        <MediaCards options={collections} />
       </div>
     </section>
   );
