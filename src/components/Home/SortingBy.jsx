@@ -1,34 +1,43 @@
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { useEffect, useState } from "react";
+import MediaCard from "../MediaCard";
+import api from "../../api/http";
+import { sliderSettings } from "../../const/slider";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Spinner } from "../UI/Spinner";
 
 const SortingBy = () => {
-  const [sort, setSort] = useState("10");
+  const [collections, setCollections] = useState([]);
 
-  const handleChange = (event) => {
-    setSort(event.target.value);
+  const getCollections = async () => {
+    try {
+      const { data } = await api.get("all_collections");
+      setCollections(data);
+    } catch (error) {
+      console.error;
+    }
   };
 
+  useEffect(() => {
+    getCollections();
+  }, []);
+
+  if (!collections) {
+    return <Spinner />;
+  }
+
   return (
-    <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="sort-select">Sort by...</InputLabel>
-        <Select
-          labelId="sort"
-          id="sort-select"
-          value={sort}
-          label="Sort by..."
-          size="small"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Last added items</MenuItem>
-          <MenuItem value={20}>The 5 largest collections</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
+    <div className="flex overflow-hidden justify-center w-full max-w-[1200px] mx-auto">
+      <Swiper {...sliderSettings} modules={[Navigation]} navigation={true}>
+        {collections?.map((collection) => (
+          <SwiperSlide key={collection.id}>
+            <MediaCard option={collection} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
 

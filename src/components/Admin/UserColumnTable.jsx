@@ -1,18 +1,23 @@
 import { getDateTime } from "../../helpers/date-utils";
+import i18next from "i18next";
 
-const UserColumnTable = [
-  { field: "id", headerName: "ID", width: 50 },
-  { field: "username", headerName: "Username", width: 150 },
-  { field: "email", headerName: "Email", width: 150 },
+const UserColumnTable = () => [
+  { field: "id", headerName: i18next.t("admin_table.id"), width: 50 },
+  {
+    field: "username",
+    headerName: i18next.t("admin_table.username"),
+    width: 150,
+  },
+  { field: "email", headerName: i18next.t("admin_table.email"), width: 150 },
   {
     field: "created_at",
-    headerName: "Registration",
+    headerName: i18next.t("admin_table.reg"),
     width: 180,
     renderCell: (params) => <>{getDateTime(params.value)}</>,
   },
   {
     field: "updated_at",
-    headerName: "Login",
+    headerName: i18next.t("admin_table.log"),
     width: 180,
     renderCell: (params) => (
       <>{params.value ? getDateTime(params.value) : "Was not logged yet"}</>
@@ -20,28 +25,32 @@ const UserColumnTable = [
   },
   {
     field: "blocked",
-    headerName: "Status",
+    headerName: i18next.t("admin_table.status"),
     width: 140,
     renderCell: (params) => (
       <>
         {params.value ? (
-          <span className="text-red-700">Blocked</span>
+          <span className="text-red-700">
+            {i18next.t("admin_table.blocked")}
+          </span>
         ) : (
-          <span className="text-green-800">Not blocked</span>
+          <span className="text-green-700">
+            {i18next.t("admin_table.not_blocked")}
+          </span>
         )}
       </>
     ),
   },
   {
     field: "admin",
-    headerName: "Admin",
+    headerName: i18next.t("admin_table.adm"),
     width: 100,
     renderCell: (params) => (
       <>
         {params.value ? (
-          <span className="text-green-800">Yes</span>
+          <span className="text-green-700">{i18next.t("admin_table.y")}</span>
         ) : (
-          <span className="text-red-700">No</span>
+          <span className="text-red-700">{i18next.t("admin_table.n")}</span>
         )}
       </>
     ),

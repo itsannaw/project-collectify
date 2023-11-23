@@ -7,3 +7,4 @@ export const OPTIONAL_FIELDS_NAMES = {
 };
 
 export const OPTIONAL_FIELDS = Object.values(OPTIONAL_FIELDS_NAMES);
+export const FIELDS_COUNTERS = [1, 2, 3];

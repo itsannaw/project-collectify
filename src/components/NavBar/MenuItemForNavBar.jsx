@@ -5,9 +5,11 @@ import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Menu from "@mui/material/Menu";
 import userStore from "../../stores/userStore";
+import { useTranslation } from "react-i18next";
 
 const MenuItemForNavBar = () => {
   const { user, getUserIfToken, logout } = userStore();
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
@@ -33,7 +35,6 @@ const MenuItemForNavBar = () => {
         aria-controls="menu-appbar"
         aria-haspopup="true"
         onClick={handleMenu}
-        color="inherit"
       >
         <AccountCircle />
       </IconButton>
@@ -54,7 +55,7 @@ const MenuItemForNavBar = () => {
                 handleClose();
               }}
             >
-              My account
+              {t("menu_item.account")}
             </MenuItem>
             {user.admin && (
               <MenuItem
@@ -63,7 +64,7 @@ const MenuItemForNavBar = () => {
                   handleClose();
                 }}
               >
-                Admin panel
+                {t("menu_item.adm")}
               </MenuItem>
             )}
             <MenuItem
@@ -73,7 +74,7 @@ const MenuItemForNavBar = () => {
                 handleClose();
               }}
             >
-              Logout
+              {t("menu_item.logout")}
             </MenuItem>
           </div>
         ) : (
@@ -83,7 +84,7 @@ const MenuItemForNavBar = () => {
               handleClose();
             }}
           >
-            Sign In
+            {t("menu_item.sign_in")}
           </MenuItem>
         )}
       </Menu>

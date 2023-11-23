@@ -37,7 +37,6 @@ function ImageUpload({ defaultValue, setValue }) {
         <label htmlFor="image-input">
           <Button
             variant="contained"
-            color="inherit"
             component="span"
             startIcon={<CloudUploadIcon />}
           >

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MediaCard from "../UserAccount/MediaCard";
+import MediaCards from "../UserAccount/MediaCards";
 import api from "../../api/http";
 
 const AllCollection = () => {
@@ -19,11 +19,9 @@ const AllCollection = () => {
   }, []);
 
   return (
-    <section>
-      <div className="flex max-w-[1000px] justify-between flex-wrap mt-6 gap-6">
-        <MediaCard options={collections} />
-      </div>
-    </section>
+    <div className="flex max-w-[1000px] justify-between flex-wrap mt-6 gap-6">
+      <MediaCards options={collections} />
+    </div>
   );
 };
 

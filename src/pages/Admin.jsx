@@ -7,8 +7,10 @@ import AdminPanel from "../components/Admin/AdminPanel";
 import userStore from "../stores/userStore";
 import { useRedirectIfNotAdmin } from "../hooks";
 import AllCollection from "../components/Admin/AllCollection";
+import { useTranslation } from "react-i18next";
 
 const Admin = () => {
+  const { t } = useTranslation();
   const { user } = userStore();
   const [value, setValue] = useState("1");
 
@@ -22,17 +24,17 @@ const Admin = () => {
     <div className="flex flex-col justify-center max-w-[1200px] mx-auto my-[80px] border p-10 rounded-lg shadow-lg">
       <div className="flex flex-col justify-center items-center gap-2">
         <div className="flex flex-col gap-2 items-center">
-          <span className="font-semibold">Hello, {user.first_name}!</span>
-          <span>
-            This is the user and content management dashboard for the site.
+          <span className="font-semibold">
+            {t("admin_panel.hi")}, {user.first_name}!
           </span>
+          <span>{t("admin_panel.desc")}</span>
         </div>
         <div className="flex flex-col justify-center items-center mt-5">
           <TabContext value={value}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="All Users" value="1" />
-              <Tab label="All Collections" value="2" />
-              <Tab label="All Items" value="3" />
+              <Tab label={t("admin_panel.label1")} value="1" />
+              <Tab label={t("admin_panel.label2")} value="2" />
+              <Tab label={t("admin_panel.label3")} value="3" />
             </TabList>
 
             <TabPanel value="1">
@@ -41,7 +43,7 @@ const Admin = () => {
             <TabPanel value="2">
               <AllCollection />
             </TabPanel>
-            <TabPanel value="3">Soon...</TabPanel>
+            <TabPanel value="3">{t("admin_panel.soon")}...</TabPanel>
           </TabContext>
         </div>
       </div>

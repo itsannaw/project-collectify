@@ -2,9 +2,12 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const MediaCard = ({ options }) => {
+const MediaCards = ({ options }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   return (
     <>
@@ -22,7 +25,9 @@ const MediaCard = ({ options }) => {
             />
             <CardContent className="flex flex-col w-full">
               <span className="font-bold">{option.title}</span>
-              <span className="truncate ">{option.desc}</span>
+              <div className="truncate ">
+                <MarkdownPreview source={option.desc} />
+              </div>
               <span>{option.theme}</span>
             </CardContent>
             <CardActions className="flex items-center justify-end">
@@ -30,7 +35,7 @@ const MediaCard = ({ options }) => {
                 size="small"
                 onClick={() => navigate(`/collection/${option.id}`)}
               >
-                Learn More
+                {t("card.more")}
               </Button>
             </CardActions>
           </div>
@@ -39,4 +44,4 @@ const MediaCard = ({ options }) => {
   );
 };
 
-export default MediaCard;
+export default MediaCards;

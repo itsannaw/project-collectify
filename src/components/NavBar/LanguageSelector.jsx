@@ -1,16 +1,12 @@
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import { IconButton } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
+import TranslateIcon from "@mui/icons-material/Translate";
+import { IconButton, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function BasicMenuForNavBar() {
-  const { t } = useTranslation();
+const LanguageSelector = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const navigate = useNavigate();
+  const { i18n } = useTranslation();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -27,7 +23,7 @@ export default function BasicMenuForNavBar() {
         edge="start"
         aria-label="menu"
       >
-        <MenuIcon />
+        <TranslateIcon />
       </IconButton>
       <Menu
         id="basic-menu"
@@ -40,21 +36,23 @@ export default function BasicMenuForNavBar() {
       >
         <MenuItem
           onClick={() => {
-            navigate("/");
+            i18n.changeLanguage("en");
             handleClose();
           }}
         >
-          {t("basic_menu.home")}
+          English
         </MenuItem>
         <MenuItem
           onClick={() => {
-            navigate("/contact");
+            i18n.changeLanguage("ru");
             handleClose();
           }}
         >
-          {t("basic_menu.contact")}
+          Русский
         </MenuItem>
       </Menu>
     </div>
   );
-}
+};
+
+export default LanguageSelector;

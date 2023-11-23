@@ -1,0 +1,84 @@
+{
+    "translation": {
+        "admin": {
+            "block": "Block",
+            "unblock": "Unblock",
+            "delete": "Delete",
+            "set_admin": "Set Admin",
+            "unset_admin": "Unset Admin"
+        },
+        "admin_table": {
+            "id": "ID",
+            "username": "Username",
+            "email": "Email",
+            "reg": "Registration",
+            "log": "Login",
+            "status": "Status",
+            "blocked": "Blocked",
+            "not_blocked": "Not blocked",
+            "adm": "Admin",
+            "y": "Yes",
+            "n": "No"
+        },
+        "admin_panel": {
+            "hi": "Hello",
+            "desc": "This is the user and content management dashboard for the site.",
+            "label1": "All Users",
+            "label2": "All Collections",
+            "label3": "All Items",
+            "soon": "Soon"
+        },
+        "basic_menu": {
+            "home": "Homepage",
+            "contact": "Contact us",
+            "search": "Search..."
+        },
+        "menu_item": {
+            "account": "My account",
+            "adm": "Admin panel",
+            "logout": "Logout",
+            "sign_in": "Sign In"
+        },
+        "contact_us": {
+            "contact1": "If you encounter any issues or have valuable suggestions for the improvement of our site",
+            "contact2": "please feel free to reach out to us via email at"
+        },
+        "home": {
+            "tags": "Search by tags...",
+            "sort": "Sort by...",
+            "last": "Last added items",
+            "large": "The 5 largest collections"
+        },
+        "user": {
+            "hi": "Hi!",
+            "desc": "This is your personal account, here you can get various information about the collections you like and also create your own!",
+            "profile": "Profile",
+            "fav": "Favourite",
+            "collec": "Your collections",
+            "settings": "Settings",
+            "email": "Email:",
+            "name": "Full name:",
+            "edit": "Edit photo",
+            "soon": "Soon..."
+        },
+        "card": {
+            "title": "Title",
+            "tags": "Tags",
+            "created": "Created",
+            "creator": "Creator",
+            "theme": "Theme",
+            "more": "Learn More",
+            "add_item": "Add item"
+        },
+        "btn": {
+            "edit": "Edit",
+            "delete": "Delete"
+        },
+        "alert": {
+            "title_del_col": "Delete Collection",
+            "content_del_col": "Are you sure you want to delete this collection? This will also delete the items in this collection!",
+            "cancel": "Cancel",
+            "delete": "Delete"
+        }
+    }
+}

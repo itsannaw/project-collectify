@@ -8,3 +8,17 @@ export const getDateTime = (dateStr) => {
 
   return `${year}-${month}-${day} ${hours}:${minutes}`;
 };
+
+export const formatDateToYYYYMMDD = (date) => {
+  if (!(date instanceof Date) || isNaN(date)) {
+    throw new Error("Invalid Date object");
+  }
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  const formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+};

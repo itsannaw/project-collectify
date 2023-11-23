@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    background-color: white;
+    color: black;
+}
+
+body.dark {
+    background-color: rgba(0, 0, 0, 0.885);
+    color: white;
+}
+
+
 .hidden-file-input {
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
@@ -12,4 +23,21 @@
     left: 0;
     white-space: nowrap;
     width: 1;
+}
+
+body.dark .wmde-markdown.wmde-markdown {
+    background: #1d1d1d;
+}
+
+.wmde-markdown.wmde-markdown {
+    background: white;
+}
+
+.swiper.swiper {
+    padding: 20px;
+}
+
+.swiper-slide.swiper-slide {
+    display: flex;
+    justify-content: center;
 }

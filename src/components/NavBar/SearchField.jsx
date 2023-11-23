@@ -1,8 +1,10 @@
 import { InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import { useTranslation } from "react-i18next";
 
 export default function SearchField() {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (event) => {
@@ -13,7 +15,7 @@ export default function SearchField() {
     <TextField
       id="search"
       type="search"
-      label="Search..."
+      label={t("basic_menu.search")}
       value={searchTerm}
       size="small"
       onChange={handleChange}

@@ -1,18 +1,17 @@
-import FavoriteTag from "../components/Home/FavouriteTag";
+import FavouriteTag from "../components/Home/FavouriteTag";
 import SortingBy from "../components/Home/SortingBy";
-import MediaCard from "../components/UserAccount/MediaCard";
+import MediaCards from "../components/UserAccount/MediaCards";
 
 const HomePage = () => {
   return (
     <div>
-      <div className="flex justify-center items-center mt-10 gap-5">
-        <span className="text-l">Add to your collection</span>
+      <div className="flex flex-col justify-center items-center mt-10 gap-5">
+        <FavouriteTag />
+        <span className="font-bold text-xl">Latest collections added...</span>
         <SortingBy />
-        <FavoriteTag />
-        <span></span>
       </div>
       <div className="flex justify-center items-center gap-5 mt-10">
-        <MediaCard />
+        <MediaCards />
       </div>
     </div>
   );

@@ -46,7 +46,7 @@ const AddEditCollection = ({ isEdit }) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      navigate(`collection/${id}`);
+      navigate(`/collection/${id}`);
     } catch (error) {
       console.error(error);
     }
@@ -62,7 +62,8 @@ const AddEditCollection = ({ isEdit }) => {
     }
   };
   const getDataOnMounted = useCallback(async () => {
-    await Promise.all([getCategories(), getCollection(id)]);
+    await getCategories();
+    await getCollection(id);
   }, [getCollection, id]);
 
   useEffect(() => {
@@ -78,7 +79,7 @@ const AddEditCollection = ({ isEdit }) => {
   }, [collection]);
 
   return (
-    <div className="flex flex-col items-center justify-center mt-5 gap-8 p-5">
+    <div className="flex flex-col items-center max-w-[600px] mx-auto justify-center mt-5 gap-8 p-5">
       <span className="text-[18px] font-bold">
         {isEdit
           ? "Edit collection"

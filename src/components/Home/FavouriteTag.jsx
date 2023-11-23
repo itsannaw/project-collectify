@@ -1,37 +1,38 @@
-import Autocomplete from "@mui/joy/Autocomplete";
-import Chip from "@mui/joy/Chip";
-import Close from "@mui/icons-material/Close";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import { useEffect, useState } from "react";
+import api from "../../api/http";
+import { useTranslation } from "react-i18next";
 
-export default function FavoriteTag() {
+const FavouriteTag = () => {
+  const { t } = useTranslation();
+  const [tips, setTips] = useState([])
+  const getTags = async () => {
+    try {
+      const { data } = await api.get("tags");
+      setTips(data.map((tag) => tag.title));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getTags();
+  }, []);
+
   return (
     <Autocomplete
-      id="tags-default"
       multiple
-      placeholder="Tags"
-      options={tags}
       limitTags={2}
-      getOptionLabel={(option) => option.title}
-      renderTags={(tags, getTagProps) =>
-        tags.map((item, index) => (
-          <Chip
-            key={item.title}
-            variant="solid"
-            color="primary"
-            endDecorator={<Close fontSize="sm" />}
-            {...getTagProps({ index })}
-          >
-            {item.title}
-          </Chip>
-        ))
-      }
+      id="tags"
+      size="small"
+      options={tips}
+      renderInput={(params) => (
+        <TextField {...params} label={t("home.tags")} />
+      )}
+      sx={{ width: "300px" }}
     />
   );
-}
+};
 
-const tags = [
-  { title: "#LOL" },
-  { title: "#goodfilms" },
-  { title: "#funnyanimals" },
-  { title: "#history" },
-  { title: "#fantasy" },
-];
+export default FavouriteTag;

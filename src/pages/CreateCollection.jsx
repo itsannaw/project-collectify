@@ -9,11 +9,10 @@ import { useNavigate } from "react-router-dom";
 import AdaptiveFields from "../components/UserAccount/Collections/AdaptiveFields";
 import { OPTIONAL_FIELDS } from "../const/collections";
 import { getFormData } from "../helpers";
-import userStore from "../stores/userStore";
 
 const CreateCollection = () => {
-  const { user } = userStore();
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
   const [forms, setForms] = useState({
     title: "",
     desc: "",
@@ -42,9 +41,12 @@ const CreateCollection = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      navigate(`user/${user.username}`);
+      navigate("")
     } catch (error) {
       console.error(error);
+      setError(
+        "Failed! Check if the fields are filled in correctly (mandatory fields are marked with an asterisk)."
+      );
     }
   };
 
@@ -63,7 +65,7 @@ const CreateCollection = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center mt-5 gap-8 p-5">
+    <div className="flex flex-col items-center max-w-[600px] mx-auto  justify-center mt-5 gap-8 p-5">
       <span className="text-[18px] font-bold">
         Here you can create your new collection!
       </span>
@@ -118,7 +120,8 @@ const CreateCollection = () => {
           );
         })}
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-4">
+        {error && <span className="text-red-500">{error}</span>}
         <LoadingButton onClick={handleSubmit} method="post" variant="contained">
           Create
         </LoadingButton>
