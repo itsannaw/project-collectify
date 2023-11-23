@@ -3,20 +3,41 @@ import { FIELDS_COUNTERS, OPTIONAL_FIELDS_NAMES } from "../const/collections";
 import { getFieldName, getInfoByCollection } from "../helpers/collections";
 import { getDateTime } from "../helpers/date-utils";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
-import api from "../api/http";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { Spinner } from "../components/UI/Spinner";
 import { useCheckUser } from "../hooks/useCheckUser";
 import { AlertButton } from "../components/UI/AlertButton";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
+import api from "../api/http";
 
 const MoreItem = () => {
   const [item, setItem] = useState();
+  const [loading, setLoading] = useState(false);
   const { id, itemId } = useParams();
   const navigate = useNavigate();
   const { checkUser } = useCheckUser();
+
+  const toggleLike = async ({ id, is_liked }) => {
+    setLoading(true);
+    try {
+      if (is_liked) {
+        await api.get(`dislike/${id}`);
+      } else {
+        await api.get(`like/${id}`);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
+    const items = [...item];
+    const item = items.find((item) => item.id === id);
+    item.likes_total += item.is_liked ? -1 : 1;
+    item.is_liked = !item.is_liked;
+    setItem(items);
+  };
 
   const getItem = useCallback(async () => {
     try {
@@ -82,7 +103,11 @@ const MoreItem = () => {
         })}
         {checkUser(item?.user_id) && (
           <div>
-            <IconButton>
+            <IconButton
+              onClick={() =>
+                navigate(`/collection/${id}/item/${itemId}/edit-item`)
+              }
+            >
               <EditOutlinedIcon />
             </IconButton>
             <AlertButton
@@ -100,11 +125,16 @@ const MoreItem = () => {
       <div className="flex flex-col items-center justify-between">
         <div className="flex flex-col items-center">
           <Checkbox
+            onClick={() => toggleLike(item)}
             icon={<FavoriteBorder />}
             checkedIcon={<Favorite />}
+            value={item.is_liked}
+            checked={item.is_liked}
             color="error"
+            // todo: render of disabled state should not be different then other view
+            disabled={loading}
           />
-          <span className="text-sm">123</span>
+          <span className="text-sm">{item.likes_total}</span>
         </div>
         <div>
           <Link component="button" onClick={() => navigate(-1)}>

@@ -12,6 +12,7 @@ import { getFormData } from "../helpers";
 
 const CreateCollection = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
   const [forms, setForms] = useState({
     title: "",
     desc: "",
@@ -40,9 +41,12 @@ const CreateCollection = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      navigate(-1);
+      navigate("")
     } catch (error) {
       console.error(error);
+      setError(
+        "Failed! Check if the fields are filled in correctly (mandatory fields are marked with an asterisk)."
+      );
     }
   };
 
@@ -116,7 +120,8 @@ const CreateCollection = () => {
           );
         })}
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-4">
+        {error && <span className="text-red-500">{error}</span>}
         <LoadingButton onClick={handleSubmit} method="post" variant="contained">
           Create
         </LoadingButton>

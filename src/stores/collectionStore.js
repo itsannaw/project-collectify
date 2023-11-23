@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import api from "../api/http";
 
-const collectionStore = create((set) => ({
+const collectionStore = create((set, get) => ({
   collection: null,
   loading: false,
   error: null,
@@ -9,10 +9,13 @@ const collectionStore = create((set) => ({
     set({ loading: true });
     try {
       const { data } = await api.get(`collection/${id}`);
-      set({ collection: data, loading: false });
+      get().setCollection(data);
     } catch (error) {
       set({ error, loading: false });
     }
+  },
+  setCollection: (collection) => {
+    set({ collection });
   },
 }));
 

@@ -7,8 +7,10 @@ import { Button, Rating } from "@mui/material";
 import ItemsCard from "../components/ItemsCard";
 import { useCheckUser } from "../hooks/useCheckUser";
 import { AlertButton } from "../components/UI/AlertButton";
+import { useTranslation } from "react-i18next";
 
 const MoreCollection = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [collections, setCollections] = useState([]);
   const [items, setItems] = useState([]);
@@ -57,17 +59,17 @@ const MoreCollection = () => {
               color="warning"
               onClick={() => navigate(`/edit-collection/${id}`)}
             >
-              Edit
+              {t("btn.edit")}
             </Button>
             <AlertButton
               buttonComponent={Button}
-              buttonText="Delete"
+              buttonText={t("btn.delete")}
               buttonColor="error"
-              dialogTitle="Delete Collection"
-              dialogContent="Are you sure you want to delete this collection? This will also delete the items in this collection!"
+              dialogTitle={t("alert.title_del_col")}
+              dialogContent={t("alert.content_del_col")}
               onAgree={() => deleteCollection}
-              disagreeText="Cancel"
-              agreeText="Delete"
+              disagreeText={t("alert.cancel")}
+              agreeText={t("alert.delete")}
             />
           </>
         )}
@@ -97,10 +99,10 @@ const MoreCollection = () => {
 
         <div className="flex flex-col gap-3 justify-start w-full">
           <span>
-            <b>Theme:</b> {collections?.category?.title}
+            <b>{t("card.theme")}:</b> {collections?.category?.title}
           </span>
           <span className="flex gap-2 items-center">
-            <b>Creator:</b>{" "}
+            <b>{t("card.creator")}:</b>{" "}
             <img
               className="h-[25px] w-[25px]"
               src={collections.user?.avatar}
@@ -110,14 +112,16 @@ const MoreCollection = () => {
             {collections.user?.username})
           </span>
           <span>
-            <b>Created:</b> {getDateTime(collections?.created_at)}
+            <b>{t("card.created")}:</b> {getDateTime(collections?.created_at)}
           </span>
         </div>
       </div>
       <div className="flex flex-col items-center">
-        <Button onClick={() => navigate(`/collection/${id}/create-item`)}>
-          Add item
-        </Button>
+        {checkUser(collections?.user_id) && (
+          <Button onClick={() => navigate(`/collection/${id}/create-item`)}>
+            {t("card.add_item")}
+          </Button>
+        )}
       </div>
       <div className="flex flex-col max-w-2xl mx-auto w-full gap-5">
         <ItemsCard setOptions={setItems} options={items} />

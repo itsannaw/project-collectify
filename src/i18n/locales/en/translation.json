@@ -60,6 +60,25 @@
             "name": "Full name:",
             "edit": "Edit photo",
             "soon": "Soon..."
+        },
+        "card": {
+            "title": "Title",
+            "tags": "Tags",
+            "created": "Created",
+            "creator": "Creator",
+            "theme": "Theme",
+            "more": "Learn More",
+            "add_item": "Add item"
+        },
+        "btn": {
+            "edit": "Edit",
+            "delete": "Delete"
+        },
+        "alert": {
+            "title_del_col": "Delete Collection",
+            "content_del_col": "Are you sure you want to delete this collection? This will also delete the items in this collection!",
+            "cancel": "Cancel",
+            "delete": "Delete"
         }
     }
 }

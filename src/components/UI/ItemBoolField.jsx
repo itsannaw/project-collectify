@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox } from "@mui/material";
 
 const ItemBoolField = ({ value, setValue, label }) => {
   const handleChange = (e) => {
@@ -8,11 +8,10 @@ const ItemBoolField = ({ value, setValue, label }) => {
   return (
     <div className="flex items-center">
       <span className="font-bold">{label}</span>
-      <FormControlLabel
-        control={<Checkbox />}
+      <Checkbox
         onChange={handleChange}
         value={value}
-        labelPlacement="start"
+        checked={value || false}
       />
     </div>
   );

@@ -6,6 +6,7 @@ import { sliderSettings } from "../../const/slider";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Spinner } from "../UI/Spinner";
 
 const SortingBy = () => {
   const [collections, setCollections] = useState([]);
@@ -22,6 +23,10 @@ const SortingBy = () => {
   useEffect(() => {
     getCollections();
   }, []);
+
+  if (!collections) {
+    return <Spinner />;
+  }
 
   return (
     <div className="flex overflow-hidden justify-center w-full max-w-[1200px] mx-auto">

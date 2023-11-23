@@ -4,8 +4,10 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const MediaCards = ({ option }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   return (
     <div
@@ -30,7 +32,7 @@ const MediaCards = ({ option }) => {
           size="small"
           onClick={() => navigate(`/collection/${option.id}`)}
         >
-          Learn More
+          {t("card.more")}
         </Button>
       </CardActions>
     </div>

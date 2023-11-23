@@ -25,8 +25,9 @@ api.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       globalRouter.navigate("/");
+      return;
     }
-    return error;
+    throw error;
   }
 );
 

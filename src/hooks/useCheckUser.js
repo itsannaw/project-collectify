@@ -6,7 +6,7 @@ export const useCheckUser = () => {
   return {
     checkUser: (userId) => {
       if (!userId) return false;
-      return userId.id === user.id || user.admin;
+      return userId === user.id || user.admin;
     },
   };
 };
