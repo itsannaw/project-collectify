@@ -40,7 +40,7 @@ const ItemsCard = ({ options, setOptions }) => {
         options.map((option) => (
           <div
             key={option.id}
-            className="flex flex-col p-5 border-2 gap-4
+            className="flex flex-col max-w-xl w-full mx-auto p-5 border-2 gap-4
           rounded-md shadow-lg transition-transform hover:scale-110 "
           >
             <div className="flex justify-between">

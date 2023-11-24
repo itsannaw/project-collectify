@@ -7,7 +7,7 @@ const AllCollection = () => {
 
   const getCollections = async () => {
     try {
-      const { data } = await api.get("collections");
+      const { data } = await api.get("all_collections");
       setCollections(data);
     } catch (error) {
       console.error;
@@ -19,7 +19,7 @@ const AllCollection = () => {
   }, []);
 
   return (
-    <div className="flex max-w-[1000px] justify-between flex-wrap mt-6 gap-6">
+    <div className="flex max-w-[1000px] justify-center flex-wrap mt-6 gap-6">
       <MediaCards options={collections} />
     </div>
   );

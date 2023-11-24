@@ -8,6 +8,7 @@ import userStore from "../stores/userStore";
 import { useRedirectIfNotAdmin } from "../hooks";
 import AllCollection from "../components/Admin/AllCollection";
 import { useTranslation } from "react-i18next";
+import AllItems from "../components/Admin/AllItems";
 
 const Admin = () => {
   const { t } = useTranslation();
@@ -43,7 +44,9 @@ const Admin = () => {
             <TabPanel value="2">
               <AllCollection />
             </TabPanel>
-            <TabPanel value="3">{t("admin_panel.soon")}...</TabPanel>
+            <TabPanel value="3">
+              <AllItems />
+            </TabPanel>
           </TabContext>
         </div>
       </div>

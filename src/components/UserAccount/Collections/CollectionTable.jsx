@@ -30,7 +30,7 @@ const CollectionTable = () => {
       <div className="flex justify-center items-center gap-3">
         <CreateCollectionButtons />
       </div>
-      <div className="flex max-w-[1000px] justify-between flex-wrap mt-6 gap-6">
+      <div className="flex max-w-[1000px] justify-center flex-wrap mt-6 gap-6">
         <MediaCards options={collections} />
       </div>
     </section>

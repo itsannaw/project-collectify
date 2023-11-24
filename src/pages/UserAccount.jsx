@@ -9,6 +9,7 @@ import CollectionTable from "../components/UserAccount/Collections/CollectionTab
 import userStore from "../stores/userStore";
 import api from "../api/http";
 import { useTranslation } from "react-i18next";
+import FavouriteItems from "../components/UserAccount/FavouriteItems";
 
 const UserAccount = () => {
   const { t } = useTranslation();
@@ -89,7 +90,9 @@ const UserAccount = () => {
               </div>
             </div>
           </TabPanel>
-          <TabPanel value="2">{t("user.soon")}</TabPanel>
+          <TabPanel value="2">
+            <FavouriteItems />
+          </TabPanel>
           <TabPanel className="max-w-[900px] w-full" value="3">
             <CollectionTable />
           </TabPanel>
