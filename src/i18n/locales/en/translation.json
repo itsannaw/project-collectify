@@ -69,7 +69,8 @@
             "theme": "Theme",
             "more": "Learn More",
             "collection": "Collection",
-            "add_item": "Add item"
+            "add_item": "Add item",
+            "rating": "Rating"
         },
         "btn": {
             "edit": "Edit",

@@ -20,17 +20,24 @@ const MediaCard = ({ option }) => {
         src={option?.image_url}
         title="image_collection"
       />
-      <CardContent className="flex flex-col w-full">
+      <CardContent className="flex flex-col w-full gap-2">
         <span className="font-bold">{option?.title}</span>
         <div className="truncate">
           <MarkdownPreview source={option?.desc} />
         </div>
-        <span></span>
+        <div className="flex flex-col gap-2">
+          <span className="text-sm">
+            <b>{t("card.rating")}:</b> {option.rating_total}
+          </span>
+          <span className="text-sm">
+            <b>{t("card.creator")}:</b> {option.user.username}
+          </span>
+        </div>
       </CardContent>
       <CardActions className="flex items-center justify-end">
         <Button
           size="small"
-          onClick={() => navigate(`/collection/${option?.id}`)}
+          onClick={() => navigate(`/collection/${option.id}`)}
         >
           {t("card.more")}
         </Button>
