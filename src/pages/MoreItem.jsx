@@ -8,18 +8,24 @@ import { useCallback, useEffect, useState } from "react";
 import { Spinner } from "../components/UI/Spinner";
 import { useCheckUser } from "../hooks/useCheckUser";
 import { AlertButton } from "../components/UI/AlertButton";
+import { useTranslation } from "react-i18next";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import api from "../api/http";
+import userStore from "../stores/userStore";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 
 const MoreItem = () => {
+  const { t } = useTranslation();
   const [item, setItem] = useState();
   const [loading, setLoading] = useState(false);
+  const { user } = userStore();
   const { id, itemId } = useParams();
   const navigate = useNavigate();
   const { checkUser } = useCheckUser();
 
   const toggleLike = async ({ id, is_liked }) => {
+    if (!user) return;
     setLoading(true);
     try {
       if (is_liked) {
@@ -77,6 +83,16 @@ const MoreItem = () => {
           <b>Tags:</b> {item.tags.map((tag) => tag.title).join(", ")}
         </span>
         <span>
+          <b>{t("card.collection")}:</b>{" "}
+          <Link
+            onClick={() => navigate(`/collection/${item.collection.id}`)}
+            color="inherit"
+            component="button"
+          >
+            {item.collection.title}
+          </Link>
+        </span>
+        <span>
           <b>Created:</b> {getDateTime(item.created_at)}
         </span>
         {Object.values(OPTIONAL_FIELDS_NAMES).map((type) => {
@@ -88,6 +104,8 @@ const MoreItem = () => {
             let value = item[getFieldName(type, count)];
             if (type === OPTIONAL_FIELDS_NAMES.CUSTOM_BOOL) {
               value = value ? "Yes" : "No";
+            } else if (type === OPTIONAL_FIELDS_NAMES.CUSTOM_TEXT) {
+              value = <MarkdownPreview source={value} />;
             }
             const doubleDot = name.includes("?") ? "" : ":";
             return (
