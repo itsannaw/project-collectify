@@ -90,10 +90,10 @@ const UserAccount = () => {
               </div>
             </div>
           </TabPanel>
-          <TabPanel value="2">
+          <TabPanel className="max-w-[900px] w-full" value="2">
             <FavouriteItems />
           </TabPanel>
-          <TabPanel className="max-w-[900px] w-full" value="3">
+          <TabPanel value="3">
             <CollectionTable />
           </TabPanel>
           <TabPanel value="4">{t("user.soon")}</TabPanel>

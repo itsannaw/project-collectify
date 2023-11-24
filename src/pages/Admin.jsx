@@ -44,7 +44,7 @@ const Admin = () => {
             <TabPanel value="2">
               <AllCollection />
             </TabPanel>
-            <TabPanel value="3">
+            <TabPanel className="max-w-2xl w-full" value="3">
               <AllItems />
             </TabPanel>
           </TabContext>
