@@ -30,9 +30,11 @@ const MediaCards = ({ options }) => {
               </div>
               <span>{option.theme}</span>
               <div className="flex flex-col gap-2">
-                <span className="text-sm">
-                  <b>{t("card.rating")}:</b> {option.rating_total}
-                </span>
+                {option.rating_total && (
+                  <span className="text-sm">
+                    <b>{t("card.rating")}:</b> {option.rating_total}
+                  </span>
+                )}
                 <span className="text-sm">
                   <b>{t("card.creator")}:</b> {option.user.username}
                 </span>
