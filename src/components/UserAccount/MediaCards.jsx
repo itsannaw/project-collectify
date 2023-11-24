@@ -14,7 +14,7 @@ const MediaCards = ({ options }) => {
       {options &&
         options.map((option) => (
           <div
-            className="flex flex-col justify-between max-w-[calc(33.33%-1rem)] w-full border-2 rounded-md shadow-lg transition-transform hover:scale-110 cursor-pointer"
+            className="flex flex-col justify-between  max-w-[calc(33.33%-1rem)] w-full border-2 rounded-md shadow-lg transition-transform hover:scale-110 cursor-pointer"
             key={option.id}
           >
             <CardMedia
@@ -23,12 +23,20 @@ const MediaCards = ({ options }) => {
               src={option.image_url}
               title="image_collection"
             />
-            <CardContent className="flex flex-col w-full">
+            <CardContent className="flex flex-col gap-2 w-full">
               <span className="font-bold">{option.title}</span>
               <div className="truncate ">
                 <MarkdownPreview source={option.desc} />
               </div>
               <span>{option.theme}</span>
+              <div className="flex flex-col gap-2">
+                <span className="text-sm">
+                  <b>{t("card.rating")}:</b> {option.rating_total}
+                </span>
+                <span className="text-sm">
+                  <b>{t("card.creator")}:</b> {option.user.username}
+                </span>
+              </div>
             </CardContent>
             <CardActions className="flex items-center justify-end">
               <Button
