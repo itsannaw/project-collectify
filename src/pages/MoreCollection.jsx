@@ -12,14 +12,15 @@ import { useTranslation } from "react-i18next";
 const MoreCollection = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [collections, setCollections] = useState([]);
+  const [collection, setCollection] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [items, setItems] = useState([]);
   const { id } = useParams();
 
-  const getCollections = useCallback(async () => {
+  const getCollection = useCallback(async () => {
     try {
       const { data } = await api.get(`collection/${id}`);
-      setCollections(data);
+      setCollection(data);
     } catch (error) {
       console.error;
     }
@@ -39,21 +40,38 @@ const MoreCollection = () => {
       const { data } = await api.get(`items/${id}`);
       setItems(data);
     } catch (error) {
-      console.error;
+      console.error(error);
     }
   }, [id]);
 
+  const onRating = async (rating) => {
+    if (loading) return;
+    setLoading(true);
+    try {
+      const payload = {
+        rating,
+      };
+      await api.post(`rating/${id}`, payload);
+      collection.rating = rating;
+      setCollection(collection);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    getCollections();
+    getCollection();
     getItems();
-  }, [getCollections, getItems]);
+  }, [getCollection, getItems]);
 
   const { checkUser } = useCheckUser();
 
   return (
     <div className="flex flex-col items-center relative max-w-[1400px] gap-5 mx-auto border rounded-xl shadow-lg m-10 p-5">
       <div className="flex absolute right-5">
-        {checkUser(collections?.user_id) && (
+        {checkUser(collection?.user_id) && (
           <>
             <Button
               color="warning"
@@ -77,47 +95,48 @@ const MoreCollection = () => {
 
       <div className="flex flex-col items-center gap-5 max-w-[800px] w-full border rounded-xl p-5">
         <div className="flex relative justify-center w-full items-start">
-          <div className="absolute left-0">
+          <div className="flex flex-col items-center absolute left-0 ">
             <Rating
-              name="simple-controlled"
-              // value={value}
-              // onChange={(event, newValue) => {
-              //   setValue(newValue);
-              // }}
+              name="rating"
+              value={collection.rating || null}
+              onChange={(event, newValue) => {
+                onRating(newValue);
+              }}
             />
+            <span className="text-sm">{collection.rating_total}</span>
           </div>
 
           <img
             className="w-[300px] h-[300px]"
-            src={collections?.image_url}
+            src={collection?.image_url}
             alt="#"
           />
         </div>
-        <span className="text-xl font-bold">{collections?.title}</span>
+        <span className="text-xl font-bold">{collection?.title}</span>
 
-        <MarkdownPreview source={collections?.desc} />
+        <MarkdownPreview source={collection?.desc} />
 
         <div className="flex flex-col gap-3 justify-start w-full">
           <span>
-            <b>{t("card.theme")}:</b> {collections?.category?.title}
+            <b>{t("card.theme")}:</b> {collection?.category?.title}
           </span>
           <span className="flex gap-2 items-center">
             <b>{t("card.creator")}:</b>{" "}
             <img
               className="h-[25px] w-[25px]"
-              src={collections.user?.avatar}
+              src={collection.user?.avatar}
               alt="avatar"
             />
-            {collections.user?.first_name} {collections.user?.last_name} (@
-            {collections.user?.username})
+            {collection.user?.first_name} {collection.user?.last_name} (@
+            {collection.user?.username})
           </span>
           <span>
-            <b>{t("card.created")}:</b> {getDateTime(collections?.created_at)}
+            <b>{t("card.created")}:</b> {getDateTime(collection?.created_at)}
           </span>
         </div>
       </div>
       <div className="flex flex-col items-center">
-        {checkUser(collections?.user_id) && (
+        {checkUser(collection?.user_id) && (
           <Button onClick={() => navigate(`/collection/${id}/create-item`)}>
             {t("card.add_item")}
           </Button>

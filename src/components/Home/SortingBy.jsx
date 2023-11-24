@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import MediaCard from "../MediaCard";
 import api from "../../api/http";
 import { sliderSettings } from "../../const/slider";
@@ -10,6 +10,7 @@ import { Spinner } from "../UI/Spinner";
 
 const SortingBy = () => {
   const [collections, setCollections] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getCollections = async () => {
     try {
@@ -19,12 +20,16 @@ const SortingBy = () => {
       console.error;
     }
   };
-
-  useEffect(() => {
-    getCollections();
+  const onMounted = useCallback(async () => {
+    setLoading(true);
+    await getCollections();
+    setLoading(false);
   }, []);
+  useEffect(() => {
+    onMounted();
+  }, [onMounted]);
 
-  if (!collections) {
+  if (!collections || loading) {
     return <Spinner />;
   }
 

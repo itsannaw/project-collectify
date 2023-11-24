@@ -5,13 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import api from "../api/http";
 import { useState } from "react";
+import userStore from "../stores/userStore";
 
 const ItemsCard = ({ options, setOptions }) => {
-  const { t } = useTranslation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { user } = userStore();
   const [loading, setLoading] = useState(false);
 
   const toggleLike = async ({ id, is_liked }) => {
+    if (!user) return;
     setLoading(true);
     try {
       if (is_liked) {
@@ -48,6 +51,18 @@ const ItemsCard = ({ options, setOptions }) => {
                 <span>
                   <b>{t("card.tags")}:</b>{" "}
                   {option.tags.map((tag) => tag.title).join(", ")}
+                </span>
+                <span>
+                  <b>{t("card.collection")}:</b>{" "}
+                  <Link
+                    onClick={() =>
+                      navigate(`/collection/${option.collection.id}`)
+                    }
+                    color="inherit"
+                    component="button"
+                  >
+                    {option.collection.title}
+                  </Link>
                 </span>
                 <span>
                   <b>{t("card.created")}:</b> {getDateTime(option.created_at)}

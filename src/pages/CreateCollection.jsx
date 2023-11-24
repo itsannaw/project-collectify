@@ -12,6 +12,7 @@ import { getFormData } from "../helpers";
 
 const CreateCollection = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [forms, setForms] = useState({
     title: "",
@@ -33,6 +34,7 @@ const CreateCollection = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     try {
       e.preventDefault();
       const formData = getFormData(forms);
@@ -41,9 +43,11 @@ const CreateCollection = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      navigate("")
+      setLoading(false);
+      navigate("");
     } catch (error) {
       console.error(error);
+      setLoading(false);
       setError(
         "Failed! Check if the fields are filled in correctly (mandatory fields are marked with an asterisk)."
       );
@@ -120,9 +124,14 @@ const CreateCollection = () => {
           );
         })}
       </div>
+      {error && <span className="text-red-500 text-center">{error}</span>}
       <div className="flex justify-center gap-4">
-        {error && <span className="text-red-500">{error}</span>}
-        <LoadingButton onClick={handleSubmit} method="post" variant="contained">
+        <LoadingButton
+          onClick={handleSubmit}
+          method="post"
+          variant="contained"
+          loading={loading}
+        >
           Create
         </LoadingButton>
       </div>

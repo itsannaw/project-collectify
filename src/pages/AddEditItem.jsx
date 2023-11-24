@@ -25,7 +25,7 @@ const AddEditItem = ({ isEdit }) => {
   const { user } = userStore();
   const navigate = useNavigate();
   const { id, itemId } = useParams();
-  const { collection, setCollection } = collectionStore();
+  const { collection, setCollection, getCollection } = collectionStore();
   const [tags, setTags] = useState([]);
   const [tips, setTips] = useState([]);
   const [forms, setForms] = useState({
@@ -58,8 +58,10 @@ const AddEditItem = ({ isEdit }) => {
     await getTags();
     if (isEdit) {
       await getItem();
+    } else {
+      getCollection(id);
     }
-  }, [getItem, isEdit]);
+  }, [getItem, isEdit, getCollection, id]);
 
   useEffect(() => {
     onMounted();
