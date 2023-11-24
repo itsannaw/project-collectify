@@ -1,11 +1,6 @@
-import { Swiper, SwiperSlide } from "swiper/react";
 import { useCallback, useEffect, useState } from "react";
 import MediaCard from "../MediaCard";
 import api from "../../api/http";
-import { sliderSettings } from "../../const/slider";
-import { Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
 import { Spinner } from "../UI/Spinner";
 
 const SortingBy = () => {
@@ -34,14 +29,12 @@ const SortingBy = () => {
   }
 
   return (
-    <div className="flex overflow-hidden justify-center w-full max-w-[1200px] mx-auto">
-      <Swiper {...sliderSettings} modules={[Navigation]} navigation={true}>
-        {collections?.map((collection) => (
-          <SwiperSlide key={collection.id}>
-            <MediaCard option={collection} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div className="flex flex-wrap justify-start w-full max-w-[1200px] gap-10 mx-auto">
+      {collections?.map((collection) => (
+        <div key={collection.id} className="max-w-[calc(33.33%-2.5rem)] w-full">
+          <MediaCard option={collection} />
+        </div>
+      ))}
     </div>
   );
 };
