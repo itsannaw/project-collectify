@@ -3,6 +3,11 @@ import { IconButton, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+const LANGUAGES = {
+  en: "English",
+  ru: "Русский",
+};
+
 const LanguageSelector = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -25,6 +30,7 @@ const LanguageSelector = () => {
       >
         <TranslateIcon />
       </IconButton>
+
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -34,22 +40,20 @@ const LanguageSelector = () => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem
-          onClick={() => {
-            i18n.changeLanguage("en");
-            handleClose();
-          }}
-        >
-          English
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            i18n.changeLanguage("ru");
-            handleClose();
-          }}
-        >
-          Русский
-        </MenuItem>
+        {Object.entries(LANGUAGES).map(([lang, langName]) => {
+          return (
+            <MenuItem
+              key={lang}
+              onClick={() => {
+                i18n.changeLanguage(lang);
+                handleClose();
+              }}
+              selected={i18n.language === lang}
+            >
+              {langName}
+            </MenuItem>
+          );
+        })}
       </Menu>
     </div>
   );

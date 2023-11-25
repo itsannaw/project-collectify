@@ -17,5 +17,9 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "react/prop-types": "off",
+    indent: ["error", 2],
+    "max-len": ["error", { code: 90 }],
+    strict: ["error", "global"],
+    "no-console": ["error", { allow: ["error"] }],
   },
 };

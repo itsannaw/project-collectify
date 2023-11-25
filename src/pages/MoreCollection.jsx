@@ -8,6 +8,7 @@ import ItemsCard from "../components/ItemsCard";
 import { useCheckUser } from "../hooks/useCheckUser";
 import { AlertButton } from "../components/UI/AlertButton";
 import { useTranslation } from "react-i18next";
+import { Spinner } from "../components/UI/Spinner";
 
 const MoreCollection = () => {
   const { t } = useTranslation();
@@ -19,8 +20,10 @@ const MoreCollection = () => {
 
   const getCollection = useCallback(async () => {
     try {
+      setLoading(true);
       const { data } = await api.get(`collection/${id}`);
       setCollection(data);
+      setLoading(false);
     } catch (error) {
       console.error;
     }
@@ -31,16 +34,19 @@ const MoreCollection = () => {
       await api.delete(`collection/${id}`);
       navigate("/");
     } catch (error) {
-      console.error;
+      console.error(error);
     }
   };
 
   const getItems = useCallback(async () => {
     try {
+      setLoading(true);
       const { data } = await api.get(`items/${id}`);
       setItems(data);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   }, [id]);
 
@@ -68,8 +74,16 @@ const MoreCollection = () => {
 
   const { checkUser } = useCheckUser();
 
+  if (!collection || loading) {
+    return <Spinner />;
+  }
+
   return (
-    <div className="flex flex-col items-center relative max-w-[1400px] gap-5 mx-auto border rounded-xl shadow-lg m-10 p-5">
+    <div
+      className="flex flex-col items-center
+     relative max-w-[1400px] gap-5 mx-auto border
+      rounded-xl shadow-lg m-10 p-5"
+    >
       <div className="flex absolute right-5">
         {checkUser(collection?.user_id) && (
           <>
@@ -93,7 +107,10 @@ const MoreCollection = () => {
         )}
       </div>
 
-      <div className="flex flex-col items-center gap-5 max-w-[800px] w-full border rounded-xl p-5">
+      <div
+        className="flex flex-col items-center gap-5
+       max-w-[800px] w-full border rounded-xl p-5"
+      >
         <div className="flex relative justify-center w-full items-start">
           <div className="flex flex-col items-center absolute left-0 ">
             <Rating
@@ -122,11 +139,13 @@ const MoreCollection = () => {
           </span>
           <span className="flex gap-2 items-center">
             <b>{t("card.creator")}:</b>{" "}
-            <img
-              className="h-[25px] w-[25px]"
-              src={collection.user?.avatar}
-              alt="avatar"
-            />
+            {collection.user?.avatar && (
+              <img
+                className="h-[25px] w-[25px]"
+                src={collection.user?.avatar}
+                alt="avatar"
+              />
+            )}
             {collection.user?.first_name} {collection.user?.last_name} (@
             {collection.user?.username})
           </span>

@@ -80,15 +80,14 @@ const AddEditItem = ({ isEdit }) => {
       const payload = { ...forms, tags };
       if (isEdit) {
         await api.put(`items/${itemId}`, payload);
-        // todo: navigate + error handles
+        navigate(`/collection/${id}`);
       } else {
         await api.post("items", payload);
       }
-      navigate("/");
+      navigate(`/collection/${id}`);
     } catch (error) {
-      console.log(error);
       if (error.response?.data.errors) {
-        console.log(error.response.data.errors);
+        console.error(error.response.data.errors);
       }
       console.error(error);
     }

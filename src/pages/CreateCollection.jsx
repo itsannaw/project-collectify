@@ -50,9 +50,7 @@ const CreateCollection = () => {
     } catch (error) {
       console.error(error);
       setLoading(false);
-      setError(
-        "Failed! Check if the fields are filled in correctly (mandatory fields are marked with an asterisk)."
-      );
+      setError("Failed! Check if the fields are filled in correctly.");
     }
   };
 
@@ -71,7 +69,10 @@ const CreateCollection = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center max-w-[600px] mx-auto  justify-center mt-5 gap-8 p-5">
+    <div
+      className="flex flex-col items-center max-w-[600px] mx-auto
+      justify-center mt-5 gap-8 p-5"
+    >
       <span className="text-[18px] font-bold">
         Here you can create your new collection!
       </span>
