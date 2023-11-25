@@ -34,6 +34,10 @@ const ItemsCard = ({ options, setOptions }) => {
     setOptions(items);
   };
 
+  if (options.length === 0) {
+    return <p>{t("error.items")}</p>;
+  }
+
   return (
     <>
       {options &&

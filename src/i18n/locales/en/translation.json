@@ -118,6 +118,10 @@
             "passw": "Password",
             "forg_passw": "Forgot password?",
             "reg_here": "Don`t have an account? Register here."
+        },
+        "error": {
+            "collection": "No collections available",
+            "items": "No items available."
         }
     }
 }

@@ -49,6 +49,7 @@ const HomePage = () => {
     fetchData();
   }, [fetchData, filter.page, getItems]);
 
+
   return (
     <div>
       <div className="flex flex-col justify-center items-center mt-10 gap-5">

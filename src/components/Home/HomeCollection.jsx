@@ -2,8 +2,10 @@ import { useCallback, useEffect, useState } from "react";
 import MediaCard from "../MediaCard";
 import api from "../../api/http";
 import { Spinner } from "../UI/Spinner";
+import { useTranslation } from "react-i18next";
 
 const HomeCollection = () => {
+  const { t } = useTranslation();
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -26,6 +28,10 @@ const HomeCollection = () => {
 
   if (!collections || loading) {
     return <Spinner />;
+  }
+
+  if (collections.length === 0) {
+    return <p>{t("error.collections")}</p>;
   }
 
   return (
