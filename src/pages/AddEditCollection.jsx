@@ -10,6 +10,7 @@ import AdaptiveFields from "../components/UserAccount/Collections/AdaptiveFields
 import { OPTIONAL_FIELDS } from "../const/collections";
 import { getFormData } from "../helpers";
 import collectionStore from "../stores/collectionStore";
+import { useTranslation } from "react-i18next";
 
 const DEFAULT_FORM_STATE = {
   title: "",
@@ -20,6 +21,7 @@ const DEFAULT_FORM_STATE = {
 };
 
 const AddEditCollection = ({ isEdit }) => {
+  const { t } = useTranslation();
   const { collection, getCollection } = collectionStore();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -79,7 +81,10 @@ const AddEditCollection = ({ isEdit }) => {
   }, [collection]);
 
   return (
-    <div className="flex flex-col items-center max-w-[600px] mx-auto justify-center mt-5 gap-8 p-5">
+    <div
+      className="flex flex-col items-center max-w-[600px] mx-auto
+     justify-center mt-5 gap-8 p-5"
+    >
       <span className="text-[18px] font-bold">
         {isEdit
           ? "Edit collection"
@@ -87,7 +92,7 @@ const AddEditCollection = ({ isEdit }) => {
       </span>
       <div className="flex flex-col gap-5 ">
         <div className="flex flex-col gap-2">
-          <span className="font-bold">Title*</span>
+          <span className="font-bold">{t("create.title")}*</span>
           <TextField
             onChange={handleChange}
             name="title"
@@ -97,14 +102,14 @@ const AddEditCollection = ({ isEdit }) => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <span className="font-bold">Description*</span>
+          <span className="font-bold">{t("create.desc")}*</span>
           <MarkdownField
             setValue={(e) => handleFormItemChange("desc", e)}
             value={forms.desc}
           />
         </div>
         <div className="flex flex-col gap-2">
-          <span className="font-bold">Theme*</span>
+          <span className="font-bold">{t("create.theme")}*</span>
           <ListSelection
             value={forms.category_id}
             setValue={(e) => handleFormItemChange("category_id", e)}
@@ -112,7 +117,7 @@ const AddEditCollection = ({ isEdit }) => {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <span className="font-bold">Picture*</span>
+          <span className="font-bold">{t("create.pic")}*</span>
           <UploadImages
             defaultValue={collection?.image_url}
             setValue={(e) => handleFormItemChange("file", e)}
@@ -120,12 +125,8 @@ const AddEditCollection = ({ isEdit }) => {
         </div>
       </div>
       <div className="flex flex-col items-center gap-3">
-        <span className="font-bold">
-          Add customizable fields for future items (if necessary)
-        </span>
-        <span className="text-[15px] opacity-80">
-          You must enter the name and type of the future input field...
-        </span>
+        <span className="font-bold">{t("create.cust_text1")}</span>
+        <span className="text-[15px] opacity-80">{t("create.cust_text2")}</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         {OPTIONAL_FIELDS.map((name) => {

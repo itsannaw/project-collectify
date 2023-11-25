@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 const ErrorPage = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col justify-center max-w-[600px] mx-auto mt-[100px] gap-[20px] p-[50px]">
+    <div className="flex flex-col justify-center max-w-[600px] mx-auto
+     mt-[100px] gap-[20px] p-[50px]">
       <span className="text-[40px] text-center font-weight font-semibold">
         Houston, we have a problem...
       </span>
       <div className="flex flex-col">
-        <span className="text-[65px] text-center text-blue-600 font-weight font-semibold text-shadow shadow-indigo-500/50">
+        <span className="text-[65px] text-center text-blue-600 font-weight
+         font-semibold text-shadow shadow-indigo-500/50">
           404
         </span>
         <span className="text-[40px] text-center font-weight font-semibold">

@@ -43,7 +43,10 @@ const UserAccount = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center max-w-[1200px] mx-auto my-[70px] border p-10 rounded-lg shadow-lg">
+    <div
+      className="flex flex-col justify-center max-w-[1200px] mx-auto
+     my-[70px] border p-10 rounded-lg shadow-lg"
+    >
       <div className="flex flex-col justify-center items-center gap-2">
         <div className="flex gap-2 items-center">
           <span className="font-bold text-xl">{t("user.hi")}</span>

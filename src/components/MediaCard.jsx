@@ -11,7 +11,9 @@ const MediaCard = ({ option }) => {
   const navigate = useNavigate();
   return (
     <div
-      className="flex flex-col justify-center items-center max-w-[300px] w-full border-2 rounded-md shadow-lg transition-transform hover:scale-110 cursor-pointer"
+      className="flex flex-col justify-center items-center max-w-[300px]
+       w-full border-2 rounded-md shadow-lg transition-transform
+       hover:scale-110 cursor-pointer"
       key={option?.id}
     >
       <CardMedia

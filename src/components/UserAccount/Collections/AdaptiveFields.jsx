@@ -5,6 +5,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useCallback, useEffect, useState } from "react";
 import { OPTIONAL_FIELDS_NAMES } from "../../../const/collections";
+import i18next from "i18next";
 
 const ITEM_IDS = {
   ONE: "1",
@@ -14,11 +15,11 @@ const ITEM_IDS = {
 const ITEM_IDS_ITER = Object.values(ITEM_IDS);
 
 const TITLE_MAPPER = {
-  [OPTIONAL_FIELDS_NAMES.CUSTOM_STRING]: "String (short text)",
-  [OPTIONAL_FIELDS_NAMES.CUSTOM_TEXT]: "Text (long text)",
-  [OPTIONAL_FIELDS_NAMES.CUSTOM_INT]: "Number",
-  [OPTIONAL_FIELDS_NAMES.CUSTOM_BOOL]: "Yes or no",
-  [OPTIONAL_FIELDS_NAMES.CUSTOM_DATE]: "Date",
+  [OPTIONAL_FIELDS_NAMES.CUSTOM_STRING]: i18next.t("create.str"),
+  [OPTIONAL_FIELDS_NAMES.CUSTOM_TEXT]: i18next.t("create.text_long"),
+  [OPTIONAL_FIELDS_NAMES.CUSTOM_INT]: i18next.t("create.num"),
+  [OPTIONAL_FIELDS_NAMES.CUSTOM_BOOL]: i18next.t("create.bool"),
+  [OPTIONAL_FIELDS_NAMES.CUSTOM_DATE]: i18next.t("create.date"),
 };
 
 const getName = (name, id, isText = false) =>

@@ -48,7 +48,10 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex flex-col justify-center max-w-[500px] mx-auto mt-[80px] border p-10 rounded-lg shadow-lg">
+    <div
+      className="flex flex-col justify-center max-w-[500px] mx-auto
+     mt-[80px] border p-10 rounded-lg shadow-lg"
+    >
       <div className="flex flex-col justify-center items-center gap-2">
         <Avatar>
           <PeopleIcon />

@@ -46,7 +46,7 @@ const ItemsCard = ({ options, setOptions }) => {
             <div className="flex justify-between">
               <div className="flex flex-col gap-4">
                 <span>
-                  <b>{t("card.title")}:</b> {option.title}
+                  <b>{option.title}</b>
                 </span>
                 <span>
                   <b>{t("card.tags")}:</b>{" "}
@@ -77,7 +77,6 @@ const ItemsCard = ({ options, setOptions }) => {
                     value={option.is_liked}
                     checked={option.is_liked}
                     color="error"
-                    // todo: render of disabled state should not be different then other view
                     disabled={loading}
                   />
                   <span className="text-sm">{option.likes_total}</span>

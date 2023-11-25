@@ -8,7 +8,6 @@ const ItemDateField = ({ value, setValue, label }) => {
   const handleChange = (e) => {
     setValue(formatDateToYYYYMMDD(e.$d));
   };
-  console.log(value);
   return (
     <div>
       <LocalizationProvider dateAdapter={AdapterDayjs}>

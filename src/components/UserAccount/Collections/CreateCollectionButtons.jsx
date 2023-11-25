@@ -1,8 +1,10 @@
 import Button from "@mui/material/Button";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function CreateCollectionButtons() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -12,7 +14,7 @@ export default function CreateCollectionButtons() {
         endIcon={<AddCircleIcon />}
         onClick={() => navigate("/create-collection")}
       >
-        Create
+        {t("btn.create")}
       </Button>
     </>
   );

@@ -14,7 +14,9 @@ const MediaCards = ({ options }) => {
       {options &&
         options.map((option) => (
           <div
-            className="flex flex-col justify-center  max-w-[calc(33.33%-1rem)] w-full border-2 rounded-md shadow-lg transition-transform hover:scale-110 cursor-pointer"
+            className="flex flex-col justify-center  max-w-[calc(33.33%-1rem)]
+            w-full border-2 rounded-md shadow-lg transition-transform
+            hover:scale-110 cursor-pointer"
             key={option.id}
           >
             <CardMedia

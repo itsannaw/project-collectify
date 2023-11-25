@@ -1,12 +1,14 @@
+// src/components/FavouriteTag.jsx
+import { useEffect, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import { useEffect, useState } from "react";
-import api from "../../api/http";
 import { useTranslation } from "react-i18next";
+import api from "../../api/http";
 
-const FavouriteTag = () => {
+const FavouriteTag = ({ filter, setFilter }) => {
   const { t } = useTranslation();
-  const [tips, setTips] = useState([])
+  const [tips, setTips] = useState([]);
+
   const getTags = async () => {
     try {
       const { data } = await api.get("tags");
@@ -20,18 +22,23 @@ const FavouriteTag = () => {
     getTags();
   }, []);
 
+
   return (
-    <Autocomplete
-      multiple
-      limitTags={2}
-      id="tags"
-      size="small"
-      options={tips}
-      renderInput={(params) => (
-        <TextField {...params} label={t("home.tags")} />
-      )}
-      sx={{ width: "300px" }}
-    />
+    <div className="flex items-center gap-5">
+      <Autocomplete
+        multiple
+        limitTags={2}
+        id="tags"
+        size="small"
+        options={tips}
+        value={filter.tags}
+        onChange={(_, tags) => setFilter({ ...filter, tags })}
+        renderInput={(params) => (
+          <TextField {...params} label={t("home.tags")} />
+        )}
+        sx={{ width: "300px" }}
+      />
+    </div>
   );
 };
 
