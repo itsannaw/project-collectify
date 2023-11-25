@@ -14,18 +14,20 @@ const ITEM_IDS = {
 };
 const ITEM_IDS_ITER = Object.values(ITEM_IDS);
 
-const TITLE_MAPPER = {
-  [OPTIONAL_FIELDS_NAMES.CUSTOM_STRING]: i18next.t("create.str"),
-  [OPTIONAL_FIELDS_NAMES.CUSTOM_TEXT]: i18next.t("create.text_long"),
-  [OPTIONAL_FIELDS_NAMES.CUSTOM_INT]: i18next.t("create.num"),
-  [OPTIONAL_FIELDS_NAMES.CUSTOM_BOOL]: i18next.t("create.bool"),
-  [OPTIONAL_FIELDS_NAMES.CUSTOM_DATE]: i18next.t("create.date"),
-};
-
 const getName = (name, id, isText = false) =>
   `${name}${id}_${isText ? "name" : "enabled"}`;
 
 const AdaptiveFields = ({ value, setValue, name }) => {
+  const TITLE_MAPPER = () => {
+    return {
+      [OPTIONAL_FIELDS_NAMES.CUSTOM_STRING]: i18next.t("create.str"),
+      [OPTIONAL_FIELDS_NAMES.CUSTOM_TEXT]: i18next.t("create.text_long"),
+      [OPTIONAL_FIELDS_NAMES.CUSTOM_INT]: i18next.t("create.num"),
+      [OPTIONAL_FIELDS_NAMES.CUSTOM_BOOL]: i18next.t("create.bool"),
+      [OPTIONAL_FIELDS_NAMES.CUSTOM_DATE]: i18next.t("create.date"),
+    };
+  };
+
   const defaultFields = Object.values(ITEM_IDS).reduce((acc, id) => {
     acc[getName(name, id)] = false;
     acc[getName(name, id, true)] = "";
@@ -61,7 +63,7 @@ const AdaptiveFields = ({ value, setValue, name }) => {
           id="header"
         >
           <span className="text-[15px] font-semibold">
-            {TITLE_MAPPER[name]}
+            {TITLE_MAPPER()[name]}
           </span>
         </AccordionSummary>
         <AccordionDetails>

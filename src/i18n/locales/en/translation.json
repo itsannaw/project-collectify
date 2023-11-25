@@ -76,7 +76,10 @@
             "edit": "Edit",
             "delete": "Delete",
             "search": "Search",
-            "create": "Create"
+            "create": "Create",
+            "sign_up": "Sign up",
+            "sign_in": "Sign in",
+            "back": "Go back"
         },
         "alert": {
             "title_del_col": "Delete Collection",
@@ -90,13 +93,31 @@
             "desc": "Description",
             "theme": "Theme",
             "pic": "Picture",
-            "cust_text": "Add customizable fields for future items (if necessary)",
+            "cust_text1": "Add customizable fields for future items (if necessary)",
             "cust_text2": "You must enter the name and type of the future input field...",
             "str": "String (short text)",
             "text_long": "Text (long text)",
             "num": "Number",
             "bool": "Yes or no",
             "date": "Date"
+        },
+        "signup": {
+            "up": "Sign up",
+            "f_name": "First name",
+            "l_name": "Last name",
+            "username": "Username",
+            "email": "Email",
+            "passw": "Password",
+            "conf_passw": "Confirm password",
+            "privacy_policy": "I have read and agree to the Privacy Policy.",
+            "have_acc": "Already have an account? Sign in!"
+        },
+        "signin": {
+            "in": "Sign in",
+            "email": "Email",
+            "passw": "Password",
+            "forg_passw": "Forgot password?",
+            "reg_here": "Don`t have an account? Register here."
         }
     }
 }

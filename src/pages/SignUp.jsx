@@ -9,8 +9,10 @@ import { unauthorizedApi } from "../api/http";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DefaultErrors from "../components/SignUp/DefaultErrors";
+import { useTranslation } from "react-i18next";
 
 const SignUp = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [forms, setForms] = useState({
     first_name: "",
@@ -64,7 +66,7 @@ const SignUp = () => {
           <AssignmentIndIcon />
         </Avatar>
         <Typography component="h5" variant="h5">
-          Sign up
+          {t("signup.up")}
         </Typography>
       </div>
       <form onSubmit={handleSubmit}>
@@ -75,7 +77,7 @@ const SignUp = () => {
             required
             fullWidth
             id="first_name"
-            label="First Name"
+            label={t("signup.f_name")}
             autoFocus
             value={forms.first_name}
             onChange={handleChange}
@@ -85,7 +87,7 @@ const SignUp = () => {
             required
             fullWidth
             id="last_name"
-            label="Last Name"
+            label={t("signup.l_name")}
             name="last_name"
             autoComplete="family-name"
             value={forms.last_name}
@@ -98,7 +100,7 @@ const SignUp = () => {
             required
             fullWidth
             id="username"
-            label="Username"
+            label={t("signup.username")}
             name="username"
             value={forms.username}
             onChange={handleChange}
@@ -108,7 +110,7 @@ const SignUp = () => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label={t("signup.email")}
             name="email"
             autoComplete="email"
             value={forms.email}
@@ -119,7 +121,7 @@ const SignUp = () => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label={t("signup.passw")}
             type="password"
             id="password"
             autoComplete="new-password"
@@ -131,7 +133,7 @@ const SignUp = () => {
             required
             fullWidth
             name="password_confirmation"
-            label="Confirm Password"
+            label={t("signup.conf_passw")}
             type="password"
             id="confirm-password"
             value={forms.password_confirmation}
@@ -148,7 +150,7 @@ const SignUp = () => {
                 onChange={() => setIsPrivacyChecked(!isPrivacyChecked)}
               />
             }
-            label="I have read and agree to the Privacy Policy."
+            label={t("signup.privacy_policy")}
           />
         </div>
         <div>
@@ -163,10 +165,10 @@ const SignUp = () => {
             loading={isLoading}
             disabled={!isPrivacyChecked}
           >
-            Sign Up
+            {t("btn.sign_up")}
           </Button>
           <Link className="text-[#1976d2] text-center underline" to="/signin">
-            Already have an account? Sign in!
+            {t("signup.have_acc")}
           </Link>
         </div>
       </form>

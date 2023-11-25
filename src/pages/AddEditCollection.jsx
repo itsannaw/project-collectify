@@ -25,6 +25,8 @@ const AddEditCollection = ({ isEdit }) => {
   const { collection, getCollection } = collectionStore();
   const navigate = useNavigate();
   const { id } = useParams();
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const [forms, setForms] = useState({ ...DEFAULT_FORM_STATE });
 
@@ -40,17 +42,33 @@ const AddEditCollection = ({ isEdit }) => {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
+    setError(null);
     try {
       e.preventDefault();
       const formData = getFormData(forms);
-      await api.put(`collection/${id}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      navigate(`/collection/${id}`);
+      if (isEdit) {
+        await api.put(`collection/${id}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        navigate(`/collection/${id}`);
+      } else {
+        const {
+          data: { id },
+        } = await api.post("collection", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        navigate(`/collection/${id}`);
+      }
     } catch (error) {
       console.error(error);
+      setError("Failed! Check if the fields are filled in correctly.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -140,9 +158,14 @@ const AddEditCollection = ({ isEdit }) => {
           );
         })}
       </div>
+      {error && <span className="text-red-500 text-center">{error}</span>}
       <div className="flex justify-center">
-        <LoadingButton onClick={handleSubmit} method="post" variant="contained">
-          {isEdit ? "Edit" : "Create"}
+        <LoadingButton
+          onClick={handleSubmit}
+          variant="contained"
+          loading={loading}
+        >
+          {isEdit ? t("btn.edit") : t("btn.create")}
         </LoadingButton>
       </div>
     </div>

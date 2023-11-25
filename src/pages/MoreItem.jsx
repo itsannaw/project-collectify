@@ -77,10 +77,10 @@ const MoreItem = () => {
     >
       <div className="flex flex-col gap-4 max-w-3xl">
         <span>
-          <b>Title:</b> {item.title}
+          <b>{t("card.title")}</b> {item.title}
         </span>
         <span>
-          <b>Tags:</b> {item.tags.map((tag) => tag.title).join(", ")}
+          <b>{t("card.tags")}</b> {item.tags.map((tag) => tag.title).join(", ")}
         </span>
         <span>
           <b>{t("card.collection")}:</b>{" "}
@@ -93,7 +93,7 @@ const MoreItem = () => {
           </Link>
         </span>
         <span>
-          <b>Created:</b> {getDateTime(item.created_at)}
+          <b>{t("card.created")}</b> {getDateTime(item.created_at)}
         </span>
         {Object.values(OPTIONAL_FIELDS_NAMES).map((type) => {
           return FIELDS_COUNTERS.filter(
@@ -156,7 +156,7 @@ const MoreItem = () => {
         </div>
         <div>
           <Link component="button" onClick={() => navigate(-1)}>
-            Go back
+            {t("btn.back")}
           </Link>
         </div>
       </div>

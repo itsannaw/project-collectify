@@ -52,10 +52,12 @@ const HomePage = () => {
   return (
     <div>
       <div className="flex flex-col justify-center items-center mt-10 gap-5">
-        <FavouriteTag filter={filter} setFilter={setFilter} />
-        <LoadingButton variant="contained" onClick={fetchData}>
-          {t("btn.search")}
-        </LoadingButton>
+        <div className="flex gap-3 items-center">
+          <FavouriteTag filter={filter} setFilter={setFilter} />
+          <LoadingButton variant="contained" onClick={fetchData}>
+            {t("btn.search")}
+          </LoadingButton>
+        </div>
         <span className="font-bold text-xl">{t("home.large")}</span>
         <HomeCollection />
       </div>

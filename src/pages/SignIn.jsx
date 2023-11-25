@@ -8,8 +8,10 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import { unauthorizedApi } from "../api/http";
 import userStore from "../stores/userStore";
+import { useTranslation } from "react-i18next";
 
 export default function SignIn() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { getUserIfToken } = userStore();
 
@@ -57,7 +59,7 @@ export default function SignIn() {
           <PeopleIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          {t("signin.in")}
         </Typography>
       </div>
       <form onSubmit={handleSubmit}>
@@ -66,7 +68,7 @@ export default function SignIn() {
           required
           fullWidth
           id="email"
-          label="Email"
+          label={t("signin.email")}
           name="email"
           type="email"
           autoComplete="email"
@@ -80,7 +82,7 @@ export default function SignIn() {
           required
           fullWidth
           name="password"
-          label="Password"
+          label={t("signin.passw")}
           type="password"
           id="password"
           autoComplete="current-password"
@@ -98,14 +100,14 @@ export default function SignIn() {
             variant="contained"
             onClick={handleSubmit}
           >
-            Sign In
+            {t("signin.in")}
           </Button>
 
           <Link className="text-[#1976d2] text-center underline">
-            Forgot password?
+            {t("signin.forg_passw")}
           </Link>
           <Link className="text-[#1976d2] text-center underline" to="/signup">
-            Don`t have an account? Register here.
+            {t("signin.reg_here")}
           </Link>
         </div>
       </form>

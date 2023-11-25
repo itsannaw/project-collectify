@@ -5,7 +5,6 @@ import SignUp from "../pages/SignUp.jsx";
 import Home from "../pages/Home.jsx";
 import ContactUs from "../pages/ContactUs.jsx";
 import Admin from "../pages/Admin.jsx";
-import CreateCollection from "../pages/CreateCollection.jsx";
 import AuthGuard from "../guards/AuthGuard.jsx";
 import UserAccount from "../pages/UserAccount.jsx";
 import HomePage from "../pages/HomePage.jsx";
@@ -42,7 +41,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "/create-collection",
-            element: protect(<CreateCollection />),
+            element: protect(<AddEditCollection />),
           },
           {
             path: "/edit-collection/:id",
@@ -54,7 +53,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "/collection/:id/item/:itemId",
-            element: (<MoreItem />),
+            element: <MoreItem />,
           },
           {
             path: "/collection/:id/item/:itemId/edit-item",

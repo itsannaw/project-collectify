@@ -99,7 +99,7 @@ const MoreCollection = () => {
               buttonColor="error"
               dialogTitle={t("alert.title_del_col")}
               dialogContent={t("alert.content_del_col")}
-              onAgree={() => deleteCollection}
+              onAgree={() => deleteCollection()}
               disagreeText={t("alert.cancel")}
               agreeText={t("alert.delete")}
             />

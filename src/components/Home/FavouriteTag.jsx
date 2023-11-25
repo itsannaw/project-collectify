@@ -24,7 +24,7 @@ const FavouriteTag = ({ filter, setFilter }) => {
 
 
   return (
-    <div className="flex items-center gap-5">
+    <>
       <Autocomplete
         multiple
         limitTags={2}
@@ -38,7 +38,7 @@ const FavouriteTag = ({ filter, setFilter }) => {
         )}
         sx={{ width: "300px" }}
       />
-    </div>
+    </>
   );
 };
 
