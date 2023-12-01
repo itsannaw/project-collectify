@@ -1,6 +1,6 @@
 # Collectify
 
-Collectify is a web application for managing personal collections of various items, such as books, stamps, whiskey, and more. Users can register, create and edit their collections, add new items, as well as leave comments and likes.
+Collectify is a web application for managing personal collections of various items, such as books, stamps, whiskey, and more. Users can register, create and edit their collections, add new items, as well as leave likes.
 
 **Features:**
 
